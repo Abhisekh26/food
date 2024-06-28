@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 
-const Demo6 = () => {
+const Demo7 = () => {
   const [order, setOrder] = useState(["front", "middle", "back"]);
 
   const handleShuffle = () => {
@@ -126,4 +126,4 @@ const Card = ({ handleShuffle, testimonial, position, imgUrl, author }) => {
   );
 };
 
-export default Demo6;
+export default Demo7;
