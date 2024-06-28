@@ -1,12 +1,13 @@
-
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { FiSearch, FiShoppingCart } from "react-icons/fi";
+import { FiSearch, FiShoppingCart, FiUser, FiLogIn, FiLogOut, FiUserPlus } from "react-icons/fi";
+
 export default function Demo2() {
   const controls = useAnimation();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     controls.start({
@@ -24,21 +25,30 @@ export default function Demo2() {
     setIsSearchFocused(false);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Fixed Navbar */}
-      {/* <header className="fixed top-0 left-0 right-0 z-50 py-6 bg-slate-50 text-white shadow-md"> */}
       <header className="fixed top-0 left-0 right-0 z-50 py-6 bg-gray-300 text-gray-950 shadow-md bg-opacity-75 backdrop-blur-md">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo Section */}
           <div className="flex items-center">
-            <img src="/nutrinuts.png" alt="Logo" className="max-w-200 max-h-200 w-16 h-16" />
+            <img
+              src="/nutrinuts.png"
+              alt="Logo"
+              className="max-w-200 max-h-200 w-16 h-16"
+            />
             <h1 className="text-4xl font-bold pl-3">NutriNuts</h1>
           </div>
 
           {/* Navigation Links */}
           <nav className="flex space-x-4 pl-96">
-            <NavItem href="#home" className="text-gray-950">Home</NavItem>
+            <NavItem href="#home" className="text-gray-950">
+              Home
+            </NavItem>
             <NavItem href="#about">About</NavItem>
             <NavItem href="#products">Products</NavItem>
             <NavItem href="#contact">Contact</NavItem>
@@ -56,6 +66,7 @@ export default function Demo2() {
             <motion.span
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
               whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
               <FiSearch />
             </motion.span>
@@ -69,11 +80,29 @@ export default function Demo2() {
             )}
           </div>
 
-          {/* Cart Icon */}
-          <div className="pr-20">
+          {/* Cart and Profile Icons */}
+          <div className="flex items-center space-x-4 pr-22">
             <span className="text-gray-950">
               <FiShoppingCart />
             </span>
+            <div className="relative mt-1 pl-3">
+              <button className="text-gray-950" onClick={toggleDropdown}>
+                <FiUser />
+              </button>
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+                  <DropdownItem href="#signIn" icon={<FiLogIn />}>
+                    Sign In
+                  </DropdownItem>
+                  <DropdownItem href="#register" icon={<FiUserPlus />}>
+                    Register
+                  </DropdownItem>
+                  <DropdownItem href="#signOut" icon={<FiLogOut />}>
+                    Sign Out
+                  </DropdownItem>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
@@ -135,3 +164,32 @@ const NavItem = ({ children, href }) => {
     </a>
   );
 };
+
+const DropdownItem = ({ children, href, icon }) => {
+  return (
+    <motion.a
+      href={href}
+      className="block px-4 py-2 text-gray-800 hover:bg-gray-200 flex items-center space-x-2"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {icon}
+      <span>{children}</span>
+    </motion.a>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
