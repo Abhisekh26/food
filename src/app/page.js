@@ -7,13 +7,6 @@ import Demo5 from "./Demo5/demo5";
 import { Demo6 } from "./Demo6/demo6";
 import Demo7 from "./Demo7/demo7";
 import Demo8 from "./Demo8/demo8";
-
-
-
-
-
-
-
 function Home() {
   return (
     <div>
