@@ -19,7 +19,7 @@ const CartModal = ({ onClose }) => {
               Your Shopping Cart
             </h2>
             <p>Your cart is currently empty.</p>
-            {/* Replace this with actual cart items */}
+           
           </div>
         </div>
       </div>

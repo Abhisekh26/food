@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useEffect } from "react";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
 import { useMeasure } from "react-use";
@@ -50,7 +46,7 @@ const SearchModal = ({ searchQuery, onClose }) => {
           <h2 className="text-4xl font-bold text-gray-950 mb-4">
             Search Results for: {searchQuery}
           </h2>
-          {/* Replace this with actual search results */}
+          
           <p>No results found.</p>
         </div>
       </motion.div>

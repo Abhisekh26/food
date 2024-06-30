@@ -15,7 +15,7 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
+/* 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -24,7 +24,19 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+
+body {
+  color: #333; /* Adjust text color to a suitable dark color */
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(240, 240, 240, 0.8) /* Adjust to your light grey color */
+  );
 }
+
+
 
 @layer utilities {
   .text-balance {
