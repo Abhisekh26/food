@@ -17,7 +17,6 @@ function Home() {
       <Demo6></Demo6>
       <Demo7></Demo7>
       <Demo8></Demo8>
-   
       <Demo10></Demo10> 
     
    
