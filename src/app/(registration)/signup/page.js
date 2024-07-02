@@ -15,7 +15,31 @@ export default function Signup() {
     const lastname = lastref.current.value;
     const email = emailref.current.value;
     const password = passref.current.value;
-    console.log(firstname,lastname,email,password);
+    if (!email.includes("@")) {
+      alert("enter a valid email");
+    }
+    if (password.length < 8) {
+      alert("password is too short");
+    }
+
+    if (
+      !password.includes("!") &&
+      !password.includes("@") &&
+      !password.includes("#") &&
+      !password.includes("$") &&
+      !password.includes("&") &&
+      !password.includes("*")
+    ) {
+      alert("Use special characters");
+    }
+
+    if (password.search(/[a-z]/) < 0) {
+      alert("Your password needs a lower case letter");
+    }
+    if (password.search(/[A-Z]/) < 0) {
+      alert("Your password needs an upper case letter");
+    }
+    console.log(firstname, lastname, email, password);
   }
 
   return (
@@ -65,7 +89,6 @@ export default function Signup() {
             <select
               class="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
               id="gender"
-              // ref={genderref}
             >
               <option value="male">Male</option>
               <option value="female">Female</option>
