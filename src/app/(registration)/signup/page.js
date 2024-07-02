@@ -1,25 +1,32 @@
 "use client";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import Notifications from "@/app/notification/notification";
 
 export default function Signup() {
+  const [notification,seTnotification]=useState(null)
+  const router=useRouter()
   const firstref = useRef();
   const lastref = useRef();
   const emailref = useRef();
   const passref = useRef();
-
-  function siggnup(event) {
+  const removeNotif = () => {
+    seTnotification(null);
+  };
+  async function siggnup(event) {
     event.preventDefault();
     console.log("hello");
     const firstname = firstref.current.value;
     const lastname = lastref.current.value;
     const email = emailref.current.value;
     const password = passref.current.value;
+   
     if (!email.includes("@")) {
-      alert("enter a valid email");
+      seTnotification({id:Math.random(),text:"Please enter a valid Email"})
     }
     if (password.length < 8) {
-      alert("password is too short");
+      seTnotification({id:Math.random(),text:"Password is too short"})
     }
 
     if (
@@ -30,20 +37,48 @@ export default function Signup() {
       !password.includes("&") &&
       !password.includes("*")
     ) {
-      alert("Use special characters");
+      seTnotification({id:Math.random(),text:"Please enter a special chracter"})
     }
 
     if (password.search(/[a-z]/) < 0) {
-      alert("Your password needs a lower case letter");
+      seTnotification({id:Math.random(),text:"Please enter a lowercase letter"})
     }
     if (password.search(/[A-Z]/) < 0) {
-      alert("Your password needs an upper case letter");
+      seTnotification({id:Math.random(),text:"Please enter a uppercase letter"})
     }
     console.log(firstname, lastname, email, password);
+    const data = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",{
+      method:"POST",
+      body:JSON.stringify({
+          email:email,
+          password:password,
+          returnSecureToken:true
+      }),
+      headers: {
+          "Content-Type": "application/json",
+        },
+    })
+    if(data.ok){
+      firstref.current.value=""
+      lastref.current.value=""
+      emailref.current.value=""
+      passref.current.value=""
+      router.push("/login")
+
+
+    }
+      
   }
+  
 
   return (
     <div>
+      <Notifications notification={notification}
+
+        removeNotif={removeNotif} ></Notifications>
+
+
+
       <div class="flex flex-col items-center justify-center dark mt-6 mb-16">
         <div class="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-6">
           <h2 class="text-2xl font-bold text-gray-200 mb-4">Sign Up</h2>
