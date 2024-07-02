@@ -5,13 +5,13 @@ import { useEffect } from "react";
 
 const NOTIFICATION_TTL = 5000;
 
-const Notifications= ({ notification, removeNotif }) => {
+const Notifications= ({ notification, removeNotification }) => {
   return (
     <div className="flex items-center justify-center">
       <AnimatePresence>
         {notification && (
           <Notification
-            removeNotif={removeNotif}
+            removeNotification={removeNotification}
             key={notification.id}
             {...notification}
           />
@@ -21,14 +21,14 @@ const Notifications= ({ notification, removeNotif }) => {
   );
 };
 
-const Notification = ({ text, id, removeNotif }) => {
+const Notification = ({ text, id, removeNotification }) => {
   useEffect(() => {
     const timeoutRef = setTimeout(() => {
       removeNotif(id);
     }, NOTIFICATION_TTL);
 
     return () => clearTimeout(timeoutRef);
-  }, [id, removeNotif]);
+  }, [id, removeNotification]);
 
   return (
     <motion.div
@@ -42,7 +42,7 @@ const Notification = ({ text, id, removeNotif }) => {
       <FiAlertCircle className="text-3xl absolute -top-4 -left-4 p-2 rounded-full bg-white text-violet-600 shadow-lg" />
       <span className="flex-grow">{text}</span>
       <button
-        onClick={() => removeNotif(id)}
+        onClick={() => removeNotification(id)}
         className="ml-auto mt-0.5 p-1 rounded-full bg-white text-violet-600 hover:bg-gray-200 transition-colors shadow"
       >
         <FiX />

@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import Notifications from "@/app/notification/notification";
 
 export default function Signup() {
-  const [notification,seTnotification]=useState(null)
-  const router=useRouter()
+  const [notification, seTnotification] = useState(null);
+  const router = useRouter();
   const firstref = useRef();
   const lastref = useRef();
   const emailref = useRef();
   const passref = useRef();
-  const removeNotif = () => {
+  const removeNotification = () => {
     seTnotification(null);
   };
   async function siggnup(event) {
@@ -21,12 +21,16 @@ export default function Signup() {
     const lastname = lastref.current.value;
     const email = emailref.current.value;
     const password = passref.current.value;
-   
+
     if (!email.includes("@")) {
-      seTnotification({id:Math.random(),text:"Please enter a valid Email"})
+      seTnotification({
+        id: Math.random(),
+        text: "Please enter a valid Email",
+      });
+      emailref.current.value = "";
     }
     if (password.length < 8) {
-      seTnotification({id:Math.random(),text:"Password is too short"})
+      seTnotification({ id: Math.random(), text: "Password is too short" });
     }
 
     if (
@@ -37,47 +41,72 @@ export default function Signup() {
       !password.includes("&") &&
       !password.includes("*")
     ) {
-      seTnotification({id:Math.random(),text:"Please enter a special chracter"})
+      seTnotification({
+        id: Math.random(),
+        text: "Please enter a special chracter",
+      });
+      passref.current.value = "";
     }
 
     if (password.search(/[a-z]/) < 0) {
-      seTnotification({id:Math.random(),text:"Please enter a lowercase letter"})
+      seTnotification({
+        id: Math.random(),
+        text: "Please enter a lowercase letter",
+      });
+      passref.current.value = "";
     }
     if (password.search(/[A-Z]/) < 0) {
-      seTnotification({id:Math.random(),text:"Please enter a uppercase letter"})
+      seTnotification({
+        id: Math.random(),
+        text: "Please enter a uppercase letter",
+      });
+      passref.current.value = "";
     }
     console.log(firstname, lastname, email, password);
-    const data = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",{
-      method:"POST",
-      body:JSON.stringify({
-          email:email,
-          password:password,
-          returnSecureToken:true
-      }),
-      headers: {
+    const data = await fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }),
+        headers: {
           "Content-Type": "application/json",
         },
-    })
-    if(data.ok){
-      firstref.current.value=""
-      lastref.current.value=""
-      emailref.current.value=""
-      passref.current.value=""
-      router.push("/login")
-
-
+      }
+    );
+    if (data.ok) {
+      firstref.current.value = "";
+      lastref.current.value = "";
+      emailref.current.value = "";
+      passref.current.value = "";
+      router.push("/login");
     }
-      
+    if (!data.ok) {
+      if (data.status === 400) {
+        seTnotification({
+          id: Math.random(),
+          text: "Email already exists.",
+        });
+        emailref.current.value = "";
+      } else {
+        seTnotification({
+          id: Math.random(),
+          text: "Something went wrong.",
+        });
+      }
+      return;
+    }
   }
-  
 
   return (
     <div>
-      <Notifications notification={notification}
-
-        removeNotif={removeNotif} ></Notifications>
-
-
+      <Notifications
+        notification={notification}
+        removeNotification={removeNotification}
+      ></Notifications>
 
       <div class="flex flex-col items-center justify-center dark mt-6 mb-16">
         <div class="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-6">
