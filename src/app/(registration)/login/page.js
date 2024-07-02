@@ -1,7 +1,34 @@
+"use client"
+import { events } from "@react-three/fiber";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 
 const Login = () => {
+
+  const emailref=useRef()
+  const passwordref=useRef()
+
+  async function signinn(event){
+    event.preventDefault()
+    console.log("happy sign un ")
+    const email= emailref.current.value;
+    const password=passwordref.current.value;
+    const data =await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",{
+      method:"POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if(data.ok){
+      const result= await data.json()
+      console.log(result.idToken)
+    }
+  }
   return (
     <div className="flex justify-center mt-14 mb-16">
       <div
@@ -29,6 +56,7 @@ const Login = () => {
               id="email"
               name="email"
               type="email"
+              ref={emailref}
             />
             <label
               className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-purple-500 peer-focus:text-sm"
@@ -45,6 +73,7 @@ const Login = () => {
               id="password"
               name="password"
               type="password"
+              ref={passwordref}
             />
             <label
               className="absolute left-0 -top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-purple-500 peer-focus:text-sm"
@@ -68,6 +97,7 @@ const Login = () => {
           <button
             className="w-full py-2 px-4 bg-purple-500 hover:bg-purple-700 rounded-md shadow-lg text-white font-semibold transition duration-200"
             type="submit"
+            onClick={signinn}
           >
             Log In
           </button>
