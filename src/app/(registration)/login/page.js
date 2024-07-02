@@ -26,7 +26,7 @@ const Login = () => {
     })
     if(data.ok){
       const result= await data.json()
-      console.log(result.idToken)
+      console.log(result)
     }
   }
   return (

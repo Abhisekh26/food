@@ -89,7 +89,7 @@ export default function Signup() {
       emailref.current.value = "";
       passref.current.value = "";
       router.push("/login");
-      username(token,fullname)
+     username(token,fullname)
     }
     if (!data.ok) {
       if (data.status === 400) {

@@ -24,7 +24,7 @@ const Notifications= ({ notification, removeNotification }) => {
 const Notification = ({ text, id, removeNotification }) => {
   useEffect(() => {
     const timeoutRef = setTimeout(() => {
-      removeNotif(id);
+      removeNotification(id);
     }, NOTIFICATION_TTL);
 
     return () => clearTimeout(timeoutRef);
