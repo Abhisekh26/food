@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "./Navbar/navbar";
  import Footer from "./Footer/Footer";
+ import { Provider } from "react-redux";
 
 const inter = Inter({ subsets: ["latin"] });
 

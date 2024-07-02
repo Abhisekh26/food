@@ -1,32 +1,34 @@
-"use client"
+"use client";
 import { events } from "@react-three/fiber";
 import Link from "next/link";
 import React, { useRef } from "react";
 
 const Login = () => {
+  const emailref = useRef();
+  const passwordref = useRef();
 
-  const emailref=useRef()
-  const passwordref=useRef()
-
-  async function signinn(event){
-    event.preventDefault()
-    console.log("happy sign un ")
-    const email= emailref.current.value;
-    const password=passwordref.current.value;
-    const data =await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",{
-      method:"POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    if(data.ok){
-      const result= await data.json()
-      console.log(result)
+  async function signinn(event) {
+    event.preventDefault();
+    console.log("happy sign un ");
+    const email = emailref.current.value;
+    const password = passwordref.current.value;
+    const data = await fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (data.ok) {
+      const result = await data.json();
+      console.log(result);
     }
   }
   return (

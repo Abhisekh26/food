@@ -12,7 +12,6 @@ export default function Signup() {
   const emailref = useRef();
   const passref = useRef();
 
-
   const removeNotification = () => {
     seTnotification(null);
   };
@@ -66,7 +65,7 @@ export default function Signup() {
       passref.current.value = "";
     }
     // console.log(firstname, lastname, email, password);
-    const fullname=`${firstname} ${lastname}`
+    const fullname = `${firstname} ${lastname}`;
     const data = await fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",
       {
@@ -82,18 +81,17 @@ export default function Signup() {
       }
     );
     if (data.ok) {
-      const result= await data.json()
-      const token=result.idToken
+      const result = await data.json();
+      const token = result.idToken;
       firstref.current.value = "";
       lastref.current.value = "";
       emailref.current.value = "";
       passref.current.value = "";
       router.push("/login");
-     username(token,fullname)
+      username(token, fullname);
     }
     if (!data.ok) {
       if (data.status === 400) {
-        
         seTnotification({
           id: Math.random(),
           text: "Email already exists.",
@@ -109,27 +107,25 @@ export default function Signup() {
     }
   }
 
- async function username(token,fullname){
-  try{
-    const getname = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",{
-      method:"POST",
-      body:JSON.stringify({
-        idToken:token,
-        displayName:fullname,
-      }),
-    
-    })
+  async function username(token, fullname) {
+    try {
+      const getname = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            idToken: token,
+            displayName: fullname,
+          }),
+        }
+      );
 
-    if(getname.ok){
-      const name= await getname.json()
-      console.log(name.displayName)
-    }
+      if (getname.ok) {
+        const name = await getname.json();
+        console.log(name.displayName);
+      }
+    } catch (e) {}
   }
-  catch(e){
-
-  }
-      
-}
 
   return (
     <div>
