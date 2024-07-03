@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userinfo from "./tokenslice";
+
+import userDetails from "./userInfoSlice";
 
 const mainStore = configureStore({
-  reducer: { users: userinfo.reducer },
+  reducer: { users: userDetails.reducer },
 });
 
 export default mainStore;

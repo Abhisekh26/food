@@ -1,36 +1,52 @@
 "use client";
+
+import { userDetailsActions } from "@/app/reduxStore/userInfoSlice";
 import { events } from "@react-three/fiber";
 import Link from "next/link";
-import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
+  const router = useRouter();
+
   const emailref = useRef();
   const passwordref = useRef();
+  const dispatch = useDispatch();
+  const userName = useSelector((state) => state.users.name);
+
+  const gettoken = useSelector((state) => state.users.Token);
 
   async function signinn(event) {
     event.preventDefault();
-    console.log("happy sign un ");
+    // console.log("happy sign un ");
     const email = emailref.current.value;
     const password = passwordref.current.value;
-    const data = await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    try {
+      const data = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBD59bwm9yQQAF7qLDdEaKDUwedoQPZT5g",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            returnSecureToken: true,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (data.ok) {
+        const result = await data.json();
+        console.log(typeof result.displayName);
+        localStorage.setItem("token", result.idToken);
+        dispatch(userDetailsActions.getname(result.displayName));
+        router.push("/profile");
       }
-    );
-    if (data.ok) {
-      const result = await data.json();
-      console.log(result);
-    }
+    } catch (error) {}
   }
+
   return (
     <div className="flex justify-center mt-14 mb-16">
       <div
