@@ -14,12 +14,10 @@ const Login = () => {
   const passwordref = useRef();
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.users.name);
-
   const gettoken = useSelector((state) => state.users.Token);
-
   async function signinn(event) {
     event.preventDefault();
-    // console.log("happy sign un ");
+
     const email = emailref.current.value;
     const password = passwordref.current.value;
     try {
@@ -44,7 +42,12 @@ const Login = () => {
         dispatch(userDetailsActions.getname(result.displayName));
         router.push("/profile");
       }
-    } catch (error) {}
+      else {
+         alert ("Enter valid credentials")
+      }
+    } catch (error) {
+      
+    }
   }
 
   return (

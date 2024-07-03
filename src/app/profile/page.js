@@ -1,6 +1,6 @@
 "use client"
 import { useSelector } from "react-redux";
-import { userinfoActions } from "@/app/reduxStore/tokenslice";
+
 
 function Profile(){
     const userName=useSelector((state)=>state.users.name)
