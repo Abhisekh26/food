@@ -1,9 +1,13 @@
+
 "use client";
 import React, { useState } from "react";
 import { FaSearch, FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { userDetailsActions } from "@/app/reduxStore/userInfoSlice"; // Import user actions
 import { SearchModal } from "./searchmodal"; 
 import CartModal from "./cartmodal"; 
 import Link from "next/link"; 
+import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
   const [selected, setSelected] = useState(1);
@@ -11,6 +15,9 @@ export const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleSearch = () => {
     setShowSearchModal(true);
@@ -26,6 +33,14 @@ export const Navbar = () => {
 
   const handleCartModalClose = () => {
     setShowCartModal(false);
+  };
+
+  const handleSignOut = () => {
+    
+    localStorage.removeItem("token");
+    dispatch(userDetailsActions.getname(""));
+    dispatch(userDetailsActions.logIn(false));
+    router.push("/login"); 
   };
 
   return (
@@ -86,7 +101,7 @@ export const Navbar = () => {
               {isProfileMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg text-zinc-900 transition-all duration-300 ease-in-out transform origin-top-right">
                   <a
-                    href="#"
+                    href="/profile"
                     className="block px-4 py-2 hover:bg-zinc-200 flex items-center space-x-2"
                   >
                     <FaUserCircle />
@@ -98,13 +113,13 @@ export const Navbar = () => {
                       <span>Sign In</span>
                     </span>
                   </Link>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-zinc-200 flex items-center space-x-2"
+                  <button
+                    className="block w-full text-left px-4 py-2 hover:bg-zinc-200 flex items-center space-x-2"
+                    onClick={handleSignOut}
                   >
                     <FaSignOutAlt />
                     <span>Sign Out</span>
-                  </a>
+                  </button>
                 </div>
               )}
             </div>

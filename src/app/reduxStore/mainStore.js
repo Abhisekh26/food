@@ -1,6 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-
-import userDetails from "./userInfoSlice";
+const { configureStore } = require("@reduxjs/toolkit");
+const { default: userDetails } = require("./userInfoSlice");
 
 const mainStore = configureStore({
   reducer: { users: userDetails.reducer },

@@ -14,7 +14,7 @@ const Login = () => {
   const passwordref = useRef();
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.users.name);
-  const gettoken = useSelector((state) => state.users.Token);
+  const logindetails=useSelector((state)=> state.users.isLoggedIn)
   async function signinn(event) {
     event.preventDefault();
 
@@ -40,6 +40,7 @@ const Login = () => {
         console.log(typeof result.displayName);
         localStorage.setItem("token", result.idToken);
         dispatch(userDetailsActions.getname(result.displayName));
+        dispatch(userDetailsActions.logIn())
         router.push("/profile");
       }
       else {
