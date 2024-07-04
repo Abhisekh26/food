@@ -1,28 +1,21 @@
-// "use client";
-// import { useSelector } from "react-redux";
-
-// function Profile() {
-//   const userName = useSelector((state) => state.users.name);
-//   const login = useSelector((state) => state.users.isLoggedIn);
-//   console.log(userName)
-//   console.log(login)
-//   return (
-//     <div>
-//       <h1> {userName}</h1>
-//       <h1>{login}</h1>
-//     </div>
-//   );
-// }
-// export default Profile;
 
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import { FaFacebook, FaTwitter, FaInstagram, FaDiscord, FaWallet } from "react-icons/fa";
 
 const Profile = () => {
   const { name, email, isVerified } = useSelector((state) => state.users);
+  const [coins, setCoins] = useState([]);
+
+  const handleIconClick = (iconIndex) => {
+    setCoins([...coins, { id: coins.length, iconIndex }]);
+    setTimeout(() => {
+      setCoins((prevCoins) => prevCoins.filter((coin) => coin.id !== coins.length));
+    }, 1000); // Adjust timing as needed
+  };
 
   return (
     <div className="flex flex-col items-center mt-14 mb-16">
@@ -112,6 +105,35 @@ const Profile = () => {
                   </Link>
                 </p>
               )}
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-blue-800 to-purple-600 rounded-xl shadow-xl p-6 w-full">
+          <h3 className="text-2xl font-semibold text-white mb-4">Earn Rewards</h3>
+          <div className="text-center text-white">
+            <p>Follow us on our social media pages to earn 100 coins!</p>
+            <div className="flex space-x-6 justify-center mt-4 relative">
+              <FaFacebook size={30} className="hover:text-blue-400 cursor-pointer transition-colors" onClick={() => handleIconClick(0)} />
+              <FaTwitter size={30} className="hover:text-blue-400 cursor-pointer transition-colors" onClick={() => handleIconClick(1)} />
+              <FaInstagram size={30} className="hover:text-pink-400 cursor-pointer transition-colors" onClick={() => handleIconClick(2)} />
+              <FaDiscord size={30} className="hover:text-purple-400 cursor-pointer transition-colors" onClick={() => handleIconClick(3)} />
+              <FaWallet size={30} className="hover:text-yellow-400 cursor-pointer transition-colors" />
+              <AnimatePresence>
+                {coins.map((coin) => (
+                  <motion.div
+                    key={coin.id}
+                    initial={{ opacity: 0, x: 0, y: 0, scale: 1 }}
+                    animate={{ opacity: 1, x: 0, y: -150, scale: 1.5 }}
+                    exit={{ opacity: 0, y: -200, scale: 2 }}
+                    transition={{ duration: 1 }}
+                    className="absolute top-0 text-3xl"
+                    style={{ left: `${coin.iconIndex * 50}px` }}
+                  >
+                    💰
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </div>
         </div>
