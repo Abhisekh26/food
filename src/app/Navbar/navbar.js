@@ -186,14 +186,15 @@
 
 
 
-"use client";
+
+
 import React, { useState } from "react";
 import { FaSearch, FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { userDetailsActions } from "@/app/reduxStore/userInfoSlice"; // Import user actions
-import { SearchModal } from "./searchmodal"; 
-import CartModal from "./cartmodal"; 
-import Link from "next/link"; 
+import { SearchModal } from "./searchmodal";
+import CartModal from "./cartmodal";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FiHome, FiBarChart2, FiPieChart } from "react-icons/fi"; // Import icons
 
@@ -227,7 +228,7 @@ export const Navbar = () => {
     localStorage.removeItem("token");
     dispatch(userDetailsActions.getname(""));
     dispatch(userDetailsActions.logIn(false));
-    router.push("/login"); 
+    router.push("/login");
   };
 
   return (
@@ -263,10 +264,9 @@ export const Navbar = () => {
                       {t.dropdown.map((item) => (
                         <Link key={item.id} href={item.path} passHref>
                           <div
-                            className="flex w-full flex-col items-center justify-center py-2 text-neutral-700 transition-colors hover:text-indigo-600"
+                            className="flex w-full items-center justify-center py-2 text-neutral-700 transition-colors hover:text-indigo-600"
                             onClick={() => setSelected(t.id)}
                           >
-                            {item.icon}
                             <span className="text-xs">{item.title}</span>
                           </div>
                         </Link>
@@ -372,9 +372,9 @@ const TAB_DATA = [
     title: "Products",
     path: "/products", 
     dropdown: [
-      { id: 1, title: "Cashew", path: "/products/cashew", icon: <FiHome className="mb-2 text-xl text-indigo-300" /> },
-      { id: 2, title: "Raisins", path: "/products/raisins", icon: <FiBarChart2 className="mb-2 text-xl text-indigo-300" /> },
-      { id: 3, title: "Almond", path: "/products/almond", icon: <FiPieChart className="mb-2 text-xl text-indigo-300" /> },
+      { id: 1, title: "Cashew", path: "/products/cashew" },
+      { id: 2, title: "Raisins", path: "/products/raisins" },
+      { id: 3, title: "Almond", path: "/products/almonds" },
     ],
   },
   {
