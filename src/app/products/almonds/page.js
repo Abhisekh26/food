@@ -1,8 +1,8 @@
 function Almonds(){
     return(
-        <div>
+        <center>
             this is an almond page 
-        </div>
+        </center>
     )
 }
 export default Almonds
