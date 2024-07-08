@@ -15,19 +15,26 @@ const Sidebar = ({ applyFilters }) => {
   
   function priceHandler(e){
       e.preventDefault()
+      setPrice(e.target.value)
       console.log(e.target.value)
   }
-  
-  function ratingHandler(){
 
+  function ratingHandler(e){
+    e.preventDefault()
+    setRating(e.target.value)
+    console.log(e.target.value)
   }
 
-  function popularityHandler(){
-
+  function popularityHandler(e){
+    e.preventDefault()
+    setPopularity(e.target.value)
+    console.log(e.target.value)
   }
 
-  function promotionHandler(){
-
+  function promotionHandler(e){
+    e.preventDefault()
+    setPromotion(e.target.value)
+    console.log(e.target.value)
   }
 
   return (
