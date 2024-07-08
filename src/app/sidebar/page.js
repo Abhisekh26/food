@@ -1,48 +1,55 @@
-
-"use client"
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { filteerActions } from "../reduxStore/filterSlices";
 
 const Sidebar = ({ applyFilters }) => {
   const [price, setPrice] = useState(0);
   const [rating, setRating] = useState(1);
-  const [popularity, setPopularity] = useState('low');
+  const [popularity, setPopularity] = useState("low");
   const [promotion, setPromotion] = useState(false);
+  const selector = useSelector((state) => state.filteredData.target);
+  const dispatch = useDispatch();
 
   const handleApplyFilters = (e) => {
     applyFilters({ price, rating, popularity, promotion });
-    console.log(e.target.value)
+    console.log(e.target.value);
   };
-  
-  function priceHandler(e){
-      e.preventDefault()
-      setPrice(e.target.value)
-      console.log(e.target.value)
+
+  function priceHandler(e) {
+    e.preventDefault();
+    setPrice(e.target.value);
+    dispatch(filteerActions.getTarget(e.target.value));
+    console.log(selector)
+    // console.log(e.target.value);
   }
 
-  function ratingHandler(e){
-    e.preventDefault()
-    setRating(e.target.value)
-    console.log(e.target.value)
+  function ratingHandler(e) {
+    e.preventDefault();
+    setRating(e.target.value);
+    console.log(e.target.value);
   }
 
-  function popularityHandler(e){
-    e.preventDefault()
-    setPopularity(e.target.value)
-    console.log(e.target.value)
+  function popularityHandler(e) {
+    e.preventDefault();
+    setPopularity(e.target.value);
+    console.log(e.target.value);
   }
 
-  function promotionHandler(e){
-    e.preventDefault()
-    setPromotion(e.target.value)
-    console.log(e.target.value)
+  function promotionHandler(e) {
+    e.preventDefault();
+    setPromotion(e.target.value);
+    console.log(e.target.value);
   }
 
   return (
     <div className="w-full md:w-64 p-4 bg-gray-200 border-r border-gray-300 h-full md:h-screen md:sticky top-0 left-0 overflow-y-auto">
       <h2 className="text-xl md:text-2xl mb-4">Filters</h2>
-      
+
       <div className="mb-4">
-        <label htmlFor="price" className="text-md md:text-lg mb-2 block">Price</label>
+        <label htmlFor="price" className="text-md md:text-lg mb-2 block">
+          Price
+        </label>
         <input
           id="price"
           type="range"
@@ -56,7 +63,9 @@ const Sidebar = ({ applyFilters }) => {
         <div className="text-right text-sm md:text-base">{price}</div>
       </div>
       <div className="mb-4">
-        <label htmlFor="rating" className="text-md md:text-lg mb-2 block">User Rating</label>
+        <label htmlFor="rating" className="text-md md:text-lg mb-2 block">
+          User Rating
+        </label>
         <input
           id="rating"
           type="range"
@@ -70,7 +79,9 @@ const Sidebar = ({ applyFilters }) => {
         <div className="text-right text-sm md:text-base">{rating}</div>
       </div>
       <div className="mb-4">
-        <label htmlFor="popularity" className="text-md md:text-lg mb-2 block">Popularity</label>
+        <label htmlFor="popularity" className="text-md md:text-lg mb-2 block">
+          Popularity
+        </label>
         <select
           id="popularity"
           value={popularity}
@@ -83,7 +94,9 @@ const Sidebar = ({ applyFilters }) => {
         </select>
       </div>
       <div className="mb-4">
-        <label htmlFor="promotion" className="text-md md:text-lg mb-2 block">BestSellers</label>
+        <label htmlFor="promotion" className="text-md md:text-lg mb-2 block">
+          BestSellers
+        </label>
         <label className="inline-flex items-center">
           <input
             id="promotion"
