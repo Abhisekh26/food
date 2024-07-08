@@ -37,18 +37,6 @@ function Almonds() {
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   );
 }
 export default Almonds;

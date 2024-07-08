@@ -44,7 +44,7 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
   };
 
   const handleClick = () => {
-    // Add your click handling logic here
+    console.log("clicked")
   };
 
   return (
