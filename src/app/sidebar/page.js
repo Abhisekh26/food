@@ -1,44 +1,45 @@
 "use client";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { filteerActions } from "../reduxStore/filterSlices";
 
-const Sidebar = ({ applyFilters }) => {
-  const [price, setPrice] = useState(0);
-  const [rating, setRating] = useState(1);
+const Sidebar = () => {
+  const [price, setPrice] = useState("all"); 
+  const [rating, setRating] = useState("all");
   const [popularity, setPopularity] = useState("low");
   const [promotion, setPromotion] = useState(false);
   
   const dispatch = useDispatch();
 
-  const handleApplyFilters = (e) => {
-    applyFilters({ price, rating, popularity, promotion });
-    console.log(e.target.value);
-  };
-
   function priceHandler(e) {
-    e.preventDefault();
     setPrice(e.target.value);
     dispatch(filteerActions.filterPrice(e.target.value));
-   
   }
 
   function ratingHandler(e) {
-    e.preventDefault();
-    setRating(e.target.value)
-    dispatch(filteerActions.filteruserRating(e.target.value))
+    setRating(e.target.value);
+    dispatch(filteerActions.filterUserRating(e.target.value));
   }
 
   function popularityHandler(e) {
-    e.preventDefault();
     setPopularity(e.target.value);
-    console.log(e.target.value);
+    dispatch(filteerActions.filterPopularity(e.target.value));
   }
 
   function promotionHandler(e) {
-    e.preventDefault();
-    setPromotion(e.target.value);
-    console.log(e.target.value);
+    setPromotion(e.target.checked);
+    dispatch(filteerActions.filterPromotion(e.target.checked));
+  }
+
+  function resetFilters() {
+    setPrice("all");
+    setRating("all");
+    setPopularity("low");
+    setPromotion(false);
+    dispatch(filteerActions.filterPrice("all"));
+    dispatch(filteerActions.filterUserRating("all"));
+    dispatch(filteerActions.filterPopularity("low"));
+    dispatch(filteerActions.filterPromotion(false));
   }
 
   return (
@@ -46,37 +47,143 @@ const Sidebar = ({ applyFilters }) => {
       <h2 className="text-xl md:text-2xl mb-4">Filters</h2>
 
       <div className="mb-4">
-        <label htmlFor="price" className="text-md md:text-lg mb-2 block">
-          Price
-        </label>
-        <input
-          id="price"
-          type="range"
-          min="500"
-          max="1500"
-          step="1"
-          value={price}
-          onChange={priceHandler}
-          className="w-full"
-        />
-        <div className="text-right text-sm md:text-base">{price}</div>
+        <label className="text-md md:text-lg mb-2 block">Price</label>
+        <div>
+          <button
+            className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium leading-4 ${
+              price === "all" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
+            }`}
+            onClick={() => {
+              setPrice("all");
+              dispatch(filteerActions.filterPrice("all"));
+            }}
+          >
+            All
+          </button>
+        </div>
+        <div>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="price"
+              value="0-500"
+              checked={price === "0-500"}
+              onChange={priceHandler}
+              className="form-radio"
+            />
+            <span className="ml-2">0 - 500</span>
+          </label>
+        </div>
+        <div>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="price"
+              value="501-1000"
+              checked={price === "501-1000"}
+              onChange={priceHandler}
+              className="form-radio"
+            />
+            <span className="ml-2">501 - 1000</span>
+          </label>
+        </div>
+        <div>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="price"
+              value="1001-1500"
+              checked={price === "1001-1500"}
+              onChange={priceHandler}
+              className="form-radio"
+            />
+            <span className="ml-2">1001 - 1500</span>
+          </label>
+        </div>
       </div>
+
       <div className="mb-4">
-        <label htmlFor="rating" className="text-md md:text-lg mb-2 block">
-          User Rating
-        </label>
-        <input
-          id="rating"
-          type="range"
-          min="1"
-          max="5"
-          step="1"
-          value={rating}
-          onChange={ratingHandler}
-          className="w-full"
-        />
-        <div className="text-right text-sm md:text-base">{rating}</div>
+        <label className="text-md md:text-lg mb-2 block">User Rating</label>
+        <div>
+          <button
+            className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium leading-4 ${
+              rating === "all" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
+            }`}
+            onClick={() => {
+              setRating("all");
+              dispatch(filteerActions.filterUserRating("all"));
+            }}
+          >
+            All
+          </button>
+        </div>
+        <div>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="rating"
+              value="1"
+              checked={rating === "1"}
+              onChange={ratingHandler}
+              className="form-radio"
+            />
+            <span className="ml-2">1</span>
+          </label>
+        </div>
+        <div>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="rating"
+              value="2"
+              checked={rating === "2"}
+              onChange={ratingHandler}
+              className="form-radio"
+            />
+            <span className="ml-2">2</span>
+          </label>
+        </div>
+        <div>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="rating"
+              value="3"
+              checked={rating === "3"}
+              onChange={ratingHandler}
+              className="form-radio"
+            />
+            <span className="ml-2">3</span>
+          </label>
+        </div>
+        <div>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="rating"
+              value="4"
+              checked={rating === "4"}
+              onChange={ratingHandler}
+              className="form-radio"
+            />
+            <span className="ml-2">4</span>
+          </label>
+        </div>
+        <div>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="rating"
+              value="5"
+              checked={rating === "5"}
+              onChange={ratingHandler}
+              className="form-radio"
+            />
+            <span className="ml-2">5</span>
+          </label>
+        </div>
       </div>
+
       <div className="mb-4">
         <label htmlFor="popularity" className="text-md md:text-lg mb-2 block">
           Popularity
@@ -92,6 +199,7 @@ const Sidebar = ({ applyFilters }) => {
           <option value="high">High</option>
         </select>
       </div>
+
       <div className="mb-4">
         <label htmlFor="promotion" className="text-md md:text-lg mb-2 block">
           BestSellers
@@ -100,18 +208,19 @@ const Sidebar = ({ applyFilters }) => {
           <input
             id="promotion"
             type="checkbox"
-            checked={promotionHandler}
-            onChange={(e) => setPromotion(e.target.checked)}
+            checked={promotion}
+            onChange={promotionHandler}
             className="form-checkbox"
           />
           <span className="ml-2">BestSellers</span>
         </label>
       </div>
+
       <button
-        onClick={handleApplyFilters}
-        className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        onClick={resetFilters}
+        className="w-full py-2 bg-gray-500 text-white rounded hover:bg-gray-700"
       >
-        Apply Filters
+        Reset Filters
       </button>
     </div>
   );
