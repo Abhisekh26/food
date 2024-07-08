@@ -4,25 +4,21 @@ const filteer = createSlice({
   name: "filtering",
   initialState: {
     priceArray: [],
-    target: null,
+  
   },
   reducers: {
     getData(state, actions) {
       state.priceArray = actions.payload;
     },
 
-    filterPrice() {
-      var arr = [];
-      priceArray.filter((items) => {
-        if (items.discountPrice > target) arr.push(items);
-        priceArray = arr;
-      });
+    filterPrice(state,actions) {
+     state.priceArray=state.priceArray.filter((item)=>
+       item.discountPrice < actions.payload
+     )
     },
  
 
-  getTarget(state, actions) {
-    state.target = actions.payload;
-  },
+
 }
 });
 export const filteerActions = filteer.actions;

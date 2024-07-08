@@ -8,7 +8,7 @@ const Sidebar = ({ applyFilters }) => {
   const [rating, setRating] = useState(1);
   const [popularity, setPopularity] = useState("low");
   const [promotion, setPromotion] = useState(false);
-  const selector = useSelector((state) => state.filteredData.target);
+  // const selector = useSelector((state) => state.filteredData.target);
   const dispatch = useDispatch();
 
   const handleApplyFilters = (e) => {
@@ -19,8 +19,8 @@ const Sidebar = ({ applyFilters }) => {
   function priceHandler(e) {
     e.preventDefault();
     setPrice(e.target.value);
-    dispatch(filteerActions.getTarget(e.target.value));
-    console.log(selector)
+    dispatch(filteerActions.filterPrice(e.target.value));
+    // console.log(selector)
     // console.log(e.target.value);
   }
 

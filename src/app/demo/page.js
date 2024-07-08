@@ -88,10 +88,10 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
             <h1 className="text-2xl font-bold mb-2 text-gray-500">{title}</h1>
             <div className="text-lg mb-2">
               <span className="block text-gray-500 mb-1" style={{ textDecoration: "line-through" }}>
-                Original Price: ${oldPrice}
+                Original Price: ₹{oldPrice}
               </span>
               <span className="text-green-500 font-bold">
-                Discounted Price: ${newPrice}
+                Discounted Price: ₹{newPrice}
               </span>
             </div>
             <div className="mt-2 flex items-center">
