@@ -57,14 +57,14 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
           transformStyle: "preserve-3d",
           transform,
         }}
-        className="relative h-[30rem] w-[22rem] rounded-xl bg-gradient-to-br from-indigo-300 to-violet-300 pr-10"
+        className="relative h-[30rem] w-[22rem] rounded-xl bg-gradient-to-br from-indigo-300 to-violet-300 pr-10 "
       >
         <div
           style={{
             transform: "translateZ(75px)",
             transformStyle: "preserve-3d",
           }}
-          className="absolute inset-4 rounded-xl bg-white shadow-lg p-4"
+          className="absolute inset-4 rounded-xl bg-white shadow-lg "
         >
           {isBestSeller === "yes" && (
             <div

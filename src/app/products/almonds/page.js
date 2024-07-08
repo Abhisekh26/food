@@ -20,8 +20,8 @@ function Almonds() {
   console.log(menu);
   return (
 
-<div className="bg-gray-100 min-h-screen p-4 flex flex-col items-center">
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div className="bg-gray-100 min-h-screen p-4 flex flex-col items-center ">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 gap-x-4 gap-y-4">
   {menu.map((item) => (
     <TiltCard
       key={item.id}
