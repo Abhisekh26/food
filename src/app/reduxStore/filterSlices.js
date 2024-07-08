@@ -15,7 +15,13 @@ const filteer = createSlice({
      state.priceArray=state.priceArray.filter((item)=>
        item.discountPrice < actions.payload
      )
-    },
+    }, 
+
+    filteruserRating(state,actions){
+      state.priceArray=state.priceArray.filter((item)=>
+      item.ratings > actions.payload
+      )
+    }
  
 
 

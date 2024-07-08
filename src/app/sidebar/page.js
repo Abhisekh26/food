@@ -26,8 +26,8 @@ const Sidebar = ({ applyFilters }) => {
 
   function ratingHandler(e) {
     e.preventDefault();
-    setRating(e.target.value);
-    console.log(e.target.value);
+    setRating(e.target.value)
+    dispatch(filteerActions.filteruserRating(e.target.value))
   }
 
   function popularityHandler(e) {
