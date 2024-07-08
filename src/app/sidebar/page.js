@@ -1,8 +1,4 @@
 
-
-
-
-
 "use client"
 import { useState } from 'react';
 
@@ -12,9 +8,27 @@ const Sidebar = ({ applyFilters }) => {
   const [popularity, setPopularity] = useState('low');
   const [promotion, setPromotion] = useState(false);
 
-  const handleApplyFilters = () => {
+  const handleApplyFilters = (e) => {
     applyFilters({ price, rating, popularity, promotion });
+    console.log(e.target.value)
   };
+  
+  function priceHandler(e){
+      e.preventDefault()
+      console.log(e.target.value)
+  }
+  
+  function ratingHandler(){
+
+  }
+
+  function popularityHandler(){
+
+  }
+
+  function promotionHandler(){
+
+  }
 
   return (
     <div className="w-full md:w-64 p-4 bg-gray-200 border-r border-gray-300 h-full md:h-screen md:sticky top-0 left-0 overflow-y-auto">
@@ -29,7 +43,7 @@ const Sidebar = ({ applyFilters }) => {
           max="1500"
           step="1"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={priceHandler}
           className="w-full"
         />
         <div className="text-right text-sm md:text-base">{price}</div>
@@ -43,7 +57,7 @@ const Sidebar = ({ applyFilters }) => {
           max="5"
           step="1"
           value={rating}
-          onChange={(e) => setRating(e.target.value)}
+          onChange={ratingHandler}
           className="w-full"
         />
         <div className="text-right text-sm md:text-base">{rating}</div>
@@ -53,7 +67,7 @@ const Sidebar = ({ applyFilters }) => {
         <select
           id="popularity"
           value={popularity}
-          onChange={(e) => setPopularity(e.target.value)}
+          onChange={popularityHandler}
           className="w-full p-2 border border-gray-300 rounded"
         >
           <option value="low">Low</option>
@@ -67,7 +81,7 @@ const Sidebar = ({ applyFilters }) => {
           <input
             id="promotion"
             type="checkbox"
-            checked={promotion}
+            checked={promotionHandler}
             onChange={(e) => setPromotion(e.target.checked)}
             className="form-checkbox"
           />
