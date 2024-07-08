@@ -1,4 +1,6 @@
-"use client"
+
+
+"use client";
 import React, { useRef } from "react";
 import {
   motion,
@@ -42,9 +44,7 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
   };
 
   const handleClick = () => {
-    console.log("ChatGPT is the best");
-    // Replace with your navigation logic to the product description page
-    // Example: history.push(`/product/${productId}`);
+    // Add your click handling logic here
   };
 
   return (
@@ -57,9 +57,8 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
           transformStyle: "preserve-3d",
           transform,
         }}
-        className="relative h-[30rem] w-[22rem] rounded-xl bg-gradient-to-br from-indigo-300 to-violet-300"
+        className="relative h-[30rem] w-[22rem] rounded-xl bg-gradient-to-br from-indigo-300 to-violet-300 pr-10"
       >
-        
         <div
           style={{
             transform: "translateZ(75px)",
@@ -67,23 +66,14 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
           }}
           className="absolute inset-4 rounded-xl bg-white shadow-lg p-4"
         >
-
-
-
-
-<div
-  className={isBestSeller === "yes" ? "absolute top-0 right-0 bg-yellow-400 text-white px-2 py-1 rounded-bl-md" : ""}
-  style={{ zIndex: 10 }}
->
-  {isBestSeller === "yes" && (
-    <span className="text-xs">Best Seller</span>
-  )}
-</div>
-
-
-
-
-
+          {isBestSeller === "yes" && (
+            <div
+              className="absolute top-0 right-0 bg-yellow-400 text-white px-2 py-1 rounded-bl-md"
+              style={{ zIndex: 10 }}
+            >
+              <span className="text-xs">Best Seller</span>
+            </div>
+          )}
           <img
             src={imageUrl}
             alt={title}
@@ -97,8 +87,12 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
           >
             <h1 className="text-2xl font-bold mb-2 text-gray-500">{title}</h1>
             <div className="text-lg mb-2">
-              <span className="block text-gray-500 mb-1" style={{ textDecoration: "line-through" }}>Original Price: ${oldPrice}</span>
-              <span className="text-green-500 font-bold">Discounted Price: ${newPrice}</span>
+              <span className="block text-gray-500 mb-1" style={{ textDecoration: "line-through" }}>
+                Original Price: ${oldPrice}
+              </span>
+              <span className="text-green-500 font-bold">
+                Discounted Price: ${newPrice}
+              </span>
             </div>
             <div className="mt-2 flex items-center">
               <p className="text-sm text-gray-600">
@@ -118,7 +112,7 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
           <button
             style={{
               position: "absolute",
-              bottom: "20px", // Adjust as needed
+              bottom: "20px",
               left: "50%",
               transform: "translateX(-50%)",
               zIndex: 10,
