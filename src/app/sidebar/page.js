@@ -27,6 +27,7 @@ const Sidebar = () => {
 
   function promotionHandler(e) {
     setPromotion(e.target.checked);
+    dispatch(filterDataActions.filterBestseller(e.target.checked))
   }
 
   function resetFilters() {

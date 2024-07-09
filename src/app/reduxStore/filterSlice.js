@@ -30,6 +30,13 @@ const filterData = createSlice({
         item.ratings > rate
       )
 
+      },
+
+      filterBestseller(state,actions){
+        // const best=console.log(actions.payload)
+         actions.payload ?state.filteredArray=state.filteredArray.filter((items)=>
+         items.bestsellers  === "yes"
+         ) :null
       }
 
 
