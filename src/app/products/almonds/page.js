@@ -1,13 +1,14 @@
-
 "use client";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import TiltCard from "@/app/demo/page";
 import { useDispatch, useSelector } from "react-redux";
-import { filteerActions } from "@/app/reduxStore/filterSlices";
+import { filterDataActions } from "@/app/reduxStore/filterSlice";
+
 
 function Almonds() {
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state.filteredData.priceArray);
+  // const [di, setDi] = useState([]);
+  const selector=useSelector((data)=>data.filterr.filteredArray)
+ const dispatch=useDispatch() 
 
   useEffect(() => {
     async function fetchItems() {
@@ -16,11 +17,13 @@ function Almonds() {
       );
 
       const raw = await data.json();
-      dispatch(filteerActions.getData(raw));
+      dispatch(filterDataActions.displayData(raw))
+      // setDi(raw);
+  
     }
 
     fetchItems();
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen p-4 flex flex-col items-center">

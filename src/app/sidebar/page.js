@@ -1,45 +1,38 @@
 "use client";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { filteerActions } from "../reduxStore/filterSlices";
+import { useDispatch, useSelector } from "react-redux";
+import { filterDataActions } from "../reduxStore/filterSlice";
 
 const Sidebar = () => {
-  const [price, setPrice] = useState("all"); 
+  const [price, setPrice] = useState("all");
   const [rating, setRating] = useState("all");
-  const [popularity, setPopularity] = useState("low");
+ 
   const [promotion, setPromotion] = useState(false);
-  
-  const dispatch = useDispatch();
+  const dispatch=useDispatch()
+  const selector=useSelector((state)=>state.filterr.x)
 
   function priceHandler(e) {
+    e.preventDefault()
     setPrice(e.target.value);
-    dispatch(filteerActions.filterPrice(e.target.value));
+    dispatch(filterDataActions.filterPrice(e.target.value))
+   console.log(selector)
   }
 
   function ratingHandler(e) {
     setRating(e.target.value);
-    dispatch(filteerActions.filterUserRating(e.target.value));
   }
 
-  function popularityHandler(e) {
-    setPopularity(e.target.value);
-    dispatch(filteerActions.filterPopularity(e.target.value));
-  }
+
 
   function promotionHandler(e) {
     setPromotion(e.target.checked);
-    dispatch(filteerActions.filterPromotion(e.target.checked));
   }
 
   function resetFilters() {
     setPrice("all");
     setRating("all");
-    setPopularity("low");
+   
     setPromotion(false);
-    dispatch(filteerActions.filterPrice("all"));
-    dispatch(filteerActions.filterUserRating("all"));
-    dispatch(filteerActions.filterPopularity("low"));
-    dispatch(filteerActions.filterPromotion(false));
   }
 
   return (
@@ -51,11 +44,13 @@ const Sidebar = () => {
         <div>
           <button
             className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium leading-4 ${
-              price === "all" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
+              price === "all"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300 text-gray-700"
             }`}
             onClick={() => {
               setPrice("all");
-              dispatch(filteerActions.filterPrice("all"));
+              // dispatch(filteerActions.filterPrice("all"));
             }}
           >
             All
@@ -107,11 +102,13 @@ const Sidebar = () => {
         <div>
           <button
             className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium leading-4 ${
-              rating === "all" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
+              rating === "all"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300 text-gray-700"
             }`}
             onClick={() => {
               setRating("all");
-              dispatch(filteerActions.filterUserRating("all"));
+              // dispatch(filteerActions.filterUserRating("all"));
             }}
           >
             All
@@ -184,21 +181,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="mb-4">
-        <label htmlFor="popularity" className="text-md md:text-lg mb-2 block">
-          Popularity
-        </label>
-        <select
-          id="popularity"
-          value={popularity}
-          onChange={popularityHandler}
-          className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
+     
 
       <div className="mb-4">
         <label htmlFor="promotion" className="text-md md:text-lg mb-2 block">
