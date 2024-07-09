@@ -20,6 +20,7 @@ const Sidebar = () => {
 
   function ratingHandler(e) {
     setRating(e.target.value);
+    dispatch(filterDataActions.filterRating(e.target.value))
   }
 
 

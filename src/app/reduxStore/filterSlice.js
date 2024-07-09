@@ -25,7 +25,10 @@ const filterData = createSlice({
 
    
       filterRating(state,actions){
-      
+      const rate=(parseInt(actions.payload))
+      state.filteredArray=state.filteredArray.filter((item)=>
+        item.ratings > rate
+      )
 
       }
 
