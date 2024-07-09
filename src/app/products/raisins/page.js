@@ -22,7 +22,7 @@ function Raisins() {
     }
 
     fetchIe();
-  }, []);
+  }, [dispatch]);
 
   // console.log(menu);
   return (

@@ -1,41 +1,36 @@
+
 "use client";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { filterDataActions } from "../reduxStore/filterSlice";
 
 const Sidebar = () => {
   const [price, setPrice] = useState("all");
   const [rating, setRating] = useState("all");
- 
   const [promotion, setPromotion] = useState(false);
-  const dispatch=useDispatch()
-  const selector=useSelector((state)=>state.filterr.x)
+  const dispatch = useDispatch();
 
-  function priceHandler(e) {
-    e.preventDefault()
+  const priceHandler = (e) => {
     setPrice(e.target.value);
-    dispatch(filterDataActions.filterPrice(e.target.value))
-   console.log(selector)
-  }
+    dispatch(filterDataActions.filterPrice(e.target.value));
+  };
 
-  function ratingHandler(e) {
+  const ratingHandler = (e) => {
     setRating(e.target.value);
-    dispatch(filterDataActions.filterRating(e.target.value))
-  }
+    dispatch(filterDataActions.filterRating(e.target.value));
+  };
 
-
-
-  function promotionHandler(e) {
+  const promotionHandler = (e) => {
     setPromotion(e.target.checked);
-    dispatch(filterDataActions.filterBestseller(e.target.checked))
-  }
+    dispatch(filterDataActions.filterBestseller(e.target.checked));
+  };
 
-  function resetFilters() {
+  const resetFilters = () => {
     setPrice("all");
     setRating("all");
-   
     setPromotion(false);
-  }
+    dispatch(filterDataActions.resetFilters());
+  };
 
   return (
     <div className="w-full md:w-64 p-4 bg-gray-200 border-r border-gray-300 h-full md:h-screen md:sticky top-0 left-0 overflow-y-auto">
@@ -46,14 +41,9 @@ const Sidebar = () => {
         <div>
           <button
             className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium leading-4 ${
-              price === "all"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300 text-gray-700"
+              price === "all" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
             }`}
-            onClick={() => {
-              setPrice("all");
-              // dispatch(filteerActions.filterPrice("all"));
-            }}
+            onClick={resetFilters}
           >
             All
           </button>
@@ -104,14 +94,9 @@ const Sidebar = () => {
         <div>
           <button
             className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium leading-4 ${
-              rating === "all"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300 text-gray-700"
+              rating === "all" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
             }`}
-            onClick={() => {
-              setRating("all");
-              // dispatch(filteerActions.filterUserRating("all"));
-            }}
+            onClick={resetFilters}
           >
             All
           </button>
@@ -182,8 +167,6 @@ const Sidebar = () => {
           </label>
         </div>
       </div>
-
-     
 
       <div className="mb-4">
         <label htmlFor="promotion" className="text-md md:text-lg mb-2 block">
