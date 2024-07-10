@@ -1,20 +1,50 @@
+
+
+
 "use client"
+
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Description = () => {
   const [selectedImage, setSelectedImage] = useState('/apricots.png');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    'Dates.png',
+    '/Dates.png',
     '/cashew.png',
     '/almonds.jpg',
     '/apricots.png',
+    '/walnuts.png' ,
+    '/raisins.png'
   ];
+
+  const openModal = (index) => {
+    setSelectedImage(images[index]);
+    setCurrentIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleNext = () => {
+    const newIndex = (currentIndex + 1) % images.length;
+    setSelectedImage(images[newIndex]);
+    setCurrentIndex(newIndex);
+  };
+
+  const handlePrev = () => {
+    const newIndex = (currentIndex - 1 + images.length) % images.length;
+    setSelectedImage(images[newIndex]);
+    setCurrentIndex(newIndex);
+  };
 
   return (
     <div className="bg-gray-100 p-6">
-      <div className="max-w-8xl mx-auto bg-white p-6 rounded-md shadow-md">
+      <div className="max-w-7xl mx-auto bg-white p-6 rounded-md shadow-md">
         <div className="flex flex-col lg:flex-row">
           {/* Product Images */}
           <div className="flex-shrink-0 flex flex-col space-y-2 mr-4">
@@ -24,7 +54,7 @@ const Description = () => {
                 src={image}
                 alt={`Product Thumbnail ${index + 1}`}
                 className="w-32 h-32 object-cover cursor-pointer"
-                onClick={() => setSelectedImage(image)}
+                onClick={() => openModal(index)}
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -35,7 +65,8 @@ const Description = () => {
           <motion.img
             src={selectedImage}
             alt="Selected Product"
-            className="w-80 h-80 object-cover"
+            className="w-80 h-80 object-cover cursor-pointer"
+            onClick={() => openModal(currentIndex)}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -73,6 +104,54 @@ const Description = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white p-8 rounded-md shadow-lg max-w-2xl w-full relative"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+            >
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                onClick={closeModal}
+              >
+                ×
+              </button>
+              <motion.img
+                src={selectedImage}
+                alt="Selected Product"
+                className="w-full h-auto object-cover"
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+              />
+              <button
+                className="absolute top-1/2 transform -translate-y-1/2 left-4 text-gray-500 hover:text-gray-700"
+                onClick={handlePrev}
+                style={{ zIndex: 10 }}
+              >
+                {'<'}
+              </button>
+              <button
+                className="absolute top-1/2 transform -translate-y-1/2 right-4 text-gray-500 hover:text-gray-700"
+                onClick={handleNext}
+                style={{ zIndex: 10 }}
+              >
+                {'>'}
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
