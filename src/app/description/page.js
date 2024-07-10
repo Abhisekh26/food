@@ -94,11 +94,15 @@ const Description = () => {
               Brand: <span className="font-medium">Brand Name</span>
             </p>
             <p className="text-gray-700 mb-4">Rating: ★★★★☆</p>
-            <p className="text-gray-700 mb-4">
+            <p
+              className="text-gray-700 mb-4"
+              style={{ textDecoration: "line-through" }}
+            >
               Original Price:{" "}
               <span className="text-xl font-bold text-green-600">₹99.99</span>
-              <br />
-              Discount Price:{" "}
+            </p>
+            <p>
+              Special Price:{" "}
               <span className="text-xl font-bold text-green-600">₹99.99</span>
             </p>
 
@@ -106,16 +110,45 @@ const Description = () => {
               <h2 className="text-xl font-semibold mb-4">Available offers</h2>
               <div className="p-2  rounded-md">
                 <p className="text-gray-700">
-                  Get 10% cashback on HDFC Bank Credit Cards. Offer valid till
-                  July 31, 2024.<Link href="https://www.hdfcbank.com/" className="text-indigo-500">T&C</Link>
+                  Get 10% cashback on{" "}
+                  <span className="text-indigo-500">
+                    HDFC Bank Credit Cards
+                  </span>
+                  .. Offer valid till July 31, 2024.
+                  <Link
+                    href="https://www.hdfcbank.com/"
+                    target="_blank"
+                    className="text-indigo-500"
+                  >
+                    T&C
+                  </Link>
                 </p>
                 <p className="text-gray-700">
-                  Get 10% cashback on SBI Bank Credit Cards. Offer valid till
-                  July 31, 2024.<Link href="https://www.onlinesbi.sbi/" className="text-indigo-500">T&C</Link>
+                  Get 10% cashback on{" "}
+                  <span className="text-indigo-500">SBI Bank Credit Cards</span>
+                  .. Offer valid till July 31, 2024.
+                  <Link
+                    href="https://www.onlinesbi.sbi/"
+                    target="_blank"
+                    className="text-indigo-500"
+                  >
+                    T&C
+                  </Link>
                 </p>
                 <p className="text-gray-700">
-                  Get 10% cashback on ICCI Bank Credit Cards. Offer valid till
-                  July 31, 2024.<Link href="https://www.icicibank.com/" className="text-indigo-500">T&C</Link>
+                  Get 10% cashback on{" "}
+                  <span className="text-indigo-500">
+                    {" "}
+                    ICCI Bank Credit Cards
+                  </span>
+                  .. Offer valid till July 31, 2024.
+                  <Link
+                    href="https://www.icicibank.com/"
+                    target="_blank"
+                    className="text-indigo-500"
+                  >
+                    T&C
+                  </Link>
                 </p>
               </div>
             </div>
