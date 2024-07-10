@@ -1,8 +1,8 @@
 
 
 
-"use client"
 
+"use client"
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,7 +16,7 @@ const Description = () => {
     '/cashew.png',
     '/almonds.jpg',
     '/apricots.png',
-    '/walnuts.png' ,
+    '/walnuts.png',
     '/raisins.png'
   ];
 
@@ -55,10 +55,8 @@ const Description = () => {
                 alt={`Product Thumbnail ${index + 1}`}
                 className="w-32 h-32 object-cover cursor-pointer"
                 onClick={() => openModal(index)}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.2 }} 
+                transition={{ duration: 0.2 }}
               />
             ))}
           </div>
