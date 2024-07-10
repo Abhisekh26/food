@@ -6,29 +6,29 @@ const Description = () => {
       <div className="max-w-6xl mx-auto bg-white p-6 rounded-md shadow-md">
         <div className="flex flex-col lg:flex-row">
           {/* Product Images */}
-          <div className="flex-shrink-0">
-            <img 
-              src="https://via.placeholder.com/400"
-              alt="Product"
-              className="w-64 h-64 object-cover"
-            />
-            <div className="flex space-x-2 mt-2">
+          <div className="flex-shrink-0 flex flex-col lg:flex-row">
+            <div className="flex flex-col space-y-2 mr-4">
               <img 
-                src="https://via.placeholder.com/100"
+                src="Dates.png"
                 alt="Product Thumbnail"
-                className="w-16 h-16 object-cover"
+                className="w-24 h-24 object-cover"
               />
               <img 
-                src="https://via.placeholder.com/100"
+                src="/cashew.png"
                 alt="Product Thumbnail"
-                className="w-16 h-16 object-cover"
+                className="w-24 h-24 object-cover"
               />
               <img 
-                src="https://via.placeholder.com/100"
+                src="/almonds.jpg"
                 alt="Product Thumbnail"
-                className="w-16 h-16 object-cover"
+                className="w-24 h-24 object-cover"
               />
             </div>
+            <img 
+              src="/apricots.png"
+              alt="Product"
+              className="w-96 h-96 object-cover"
+            />
           </div>
 
           {/* Product Details */}
