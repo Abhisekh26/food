@@ -1,35 +1,45 @@
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Description = () => {
+  const [selectedImage, setSelectedImage] = useState('/apricots.png');
+
+  const images = [
+    'Dates.png',
+    '/cashew.png',
+    '/almonds.jpg',
+    '/apricots.png',
+  ];
+
   return (
     <div className="bg-gray-100 p-6">
-      <div className="max-w-6xl mx-auto bg-white p-6 rounded-md shadow-md">
+      <div className="max-w-8xl mx-auto bg-white p-6 rounded-md shadow-md">
         <div className="flex flex-col lg:flex-row">
           {/* Product Images */}
-          <div className="flex-shrink-0 flex flex-col lg:flex-row">
-            <div className="flex flex-col space-y-2 mr-4">
-              <img 
-                src="Dates.png"
-                alt="Product Thumbnail"
-                className="w-24 h-24 object-cover"
+          <div className="flex-shrink-0 flex flex-col space-y-2 mr-4">
+            {images.map((image, index) => (
+              <motion.img
+                key={index}
+                src={image}
+                alt={`Product Thumbnail ${index + 1}`}
+                className="w-32 h-32 object-cover cursor-pointer"
+                onClick={() => setSelectedImage(image)}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ scale: 1.05 }}
               />
-              <img 
-                src="/cashew.png"
-                alt="Product Thumbnail"
-                className="w-24 h-24 object-cover"
-              />
-              <img 
-                src="/almonds.jpg"
-                alt="Product Thumbnail"
-                className="w-24 h-24 object-cover"
-              />
-            </div>
-            <img 
-              src="/apricots.png"
-              alt="Product"
-              className="w-96 h-96 object-cover"
-            />
+            ))}
           </div>
+          <motion.img
+            src={selectedImage}
+            alt="Selected Product"
+            className="w-80 h-80 object-cover"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          />
 
           {/* Product Details */}
           <div className="flex-grow ml-6 mt-6 lg:mt-0">
