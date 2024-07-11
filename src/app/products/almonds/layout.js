@@ -15,8 +15,10 @@ function Layout({ children }) {
             <Sidebar />
           </div>
         )}
-        <div className="w-3/4 pt-4 pr-10 ">{children}</div>
+        <div className=" ">{children}</div>
       </div>
+
+    
     </>
   );
 }

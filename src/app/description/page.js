@@ -2,14 +2,12 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import FrequentlyBoughtCard from "../frequently/frequently";
 import { useSelector } from "react-redux";
 
 const Description = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const selector = useSelector((state) => state.product.detail);
-  console.log(selector);
   const [selectedImage, setSelectedImage] = useState(selector.imageUrl);
   const images = [
     selector.imageUrl,
@@ -17,26 +15,7 @@ const Description = () => {
     selector.image2,
     selector.image3,
     selector.image4,
-   
-  ];
-
-  // const frequentlyBoughtItems = [
-  //   {
-  //     image: "/product1.jpg",
-  //     name: "Product 1",
-  //     price: 299,
-  //   },
-  //   {
-  //     image: "/product2.jpg",
-  //     name: "Product 2",
-  //     price: 399,
-  //   },
-  //   {
-  //     image: "/product3.jpg",
-  //     name: "Product 3",
-  //     price: 499,
-  //   },
-  // ];
+  ].filter((image) => image);
 
   const openModal = (index) => {
     setSelectedImage(images[index]);
@@ -61,8 +40,8 @@ const Description = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6">
-      <div className="max-w-7xl mx-auto bg-white p-6 rounded-md shadow-md">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 pl-40">
+      <div className="max-w-6xl w-full bg-white p-6 rounded-md shadow-md">
         <div className="flex flex-col lg:flex-row">
           {/* Product Images */}
           <div className="flex-shrink-0 flex flex-col space-y-2 mr-4">
@@ -71,7 +50,7 @@ const Description = () => {
                 key={index}
                 src={image}
                 alt={`Product Thumbnail ${index + 1}`}
-                className="w-32 h-32 object-cover cursor-pointer"
+                className="w-48 h-48 object-cover cursor-pointer"
                 onClick={() => openModal(index)}
                 whileHover={{ scale: 1.2 }}
                 transition={{ duration: 0.2 }}
@@ -81,7 +60,7 @@ const Description = () => {
           <motion.img
             src={selectedImage}
             alt="Selected Product"
-            className="w-80 h-80 object-cover cursor-pointer"
+            className="w-96 h-96 object-cover cursor-pointer"
             onClick={() => openModal(currentIndex)}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -92,7 +71,7 @@ const Description = () => {
           <div className="flex-grow ml-6 mt-6 lg:mt-0">
             <h1 className="text-4xl font-semibold mb-2">{selector.title}</h1>
             <p className="text-gray-700 mb-4">
-              Brand: <span className="font-medium">{selector.title}</span>
+              Brand: <span className="font-medium">{selector.brand}</span>
             </p>
             <p className="text-gray-700 mb-4">Rating: {selector.rating}</p>
             <p
@@ -177,7 +156,9 @@ const Description = () => {
                   type="number"
                   id="size-500g"
                   className="border border-gray-300 rounded-md p-1 "
-                  value={selector.mquantity ? selector.mquantity.quantity || 0 : 0}
+                  value={
+                    selector.mquantity? selector.mquantity.quantity || 0 : 0
+                  }
                 />
               </div>
               <div className="flex items-center space-x-2">
@@ -188,7 +169,7 @@ const Description = () => {
                   type="number"
                   id="size-1kg"
                   className="border border-gray-300 rounded-md p-1 pr-2"
-                  value={selector.lquantity ? selector.lquantity.quantity || 0 : 0}
+                  value={selector.lquantity? selector.lquantity.quantity || 0 : 0}
                 />
               </div>
             </div>
@@ -215,23 +196,6 @@ const Description = () => {
                 make an informed decision.
               </p>
             </div>
-
-            {/* Frequently Bought Together Items */}
-            {/* <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">
-                Frequently Bought Together
-              </h2>
-              <div className="space-y-4">
-                {frequentlyBoughtItems.map((item, index) => (
-                  <FrequentlyBoughtCard
-                    key={index}
-                    image={item.image}
-                    name={item.name}
-                    price={item.price}
-                  />
-                ))}
-              </div>
-            </div> */}
 
             {/* Product Reviews */}
             <div className="mt-8">
@@ -264,7 +228,7 @@ const Description = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="bg-white p-6 rounded-md shadow-md max-w-lg mx-auto relative">
+            <div className="bg-white p-6 rounded-md shadow-md max-w-4xl w-full mx-auto relative">
               <button
                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
                 onClick={closeModal}
@@ -274,25 +238,23 @@ const Description = () => {
               <motion.img
                 src={selectedImage}
                 alt="Selected Product Modal"
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               />
-              <div className="flex justify-between mt-4">
-                <button
-                  className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
-                  onClick={handlePrev}
-                >
-                  Previous
-                </button>
-                <button
-                  className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
-                  onClick={handleNext}
-                >
-                  Next
-                </button>
-              </div>
+              <button
+                className="absolute top-1/2 transform -translate-y-1/2 left-2 flex items-center bg-gray-800 text-white rounded-full p-2"
+                onClick={handlePrev}
+              >
+                {"<"}
+              </button>
+              <button
+                className="absolute top-1/2 transform -translate-y-1/2 right-2 flex items-center bg-gray-800 text-white rounded-full p-2"
+                onClick={handleNext}
+              >
+                {">"}
+              </button>
             </div>
           </motion.div>
         )}
