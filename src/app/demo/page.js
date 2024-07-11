@@ -1,5 +1,3 @@
-
-
 "use client";
 import React, { useRef } from "react";
 import {
@@ -9,17 +7,53 @@ import {
   useSpring,
 } from "framer-motion";
 import { AiFillStar } from "react-icons/ai";
+import { useSelect } from "@react-three/drei";
+import { useDispatch, useSelector } from "react-redux";
+
+import { usePathname, useRouter } from "next/navigation";
+import ProductdetailSlice, { ProductdetailSliceAction } from "../reduxStore/productdetailclice";
 
 const ROTATION_RANGE = 32.5;
 const HALF_ROTATION_RANGE = 32.5 / 2;
 
-const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller }) => {
+const TiltCard = ({
+  title,
+  imageUrl,
+  image1,
+  image2,
+  image3,
+  image4,
+  oldPrice,
+  newPrice,
+  rating,
+  isBestSeller,
+  lquantity,
+  mquantity,
+  squantity,
+}) => {
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const xSpring = useSpring(x);
   const ySpring = useSpring(y);
   const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
+  const router=useRouter()
+  const path=usePathname()
+  const selector=useSelector((state)=>state.product.detail)
+  const dispatch=useDispatch()
+  const dataDetail={ title,
+    imageUrl,
+    image1,
+    image2,
+    image3,
+    image4,
+    oldPrice,
+    newPrice,
+    rating,
+    isBestSeller,
+    lquantity,
+    mquantity,
+    squantity,}
 
   const handleMouseMove = (e) => {
     if (!ref.current) return;
@@ -44,7 +78,10 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
   };
 
   const handleClick = () => {
-    console.log("clicked")
+    router.push(`${path}/${title}`)
+   dispatch(ProductdetailSliceAction.productdetail(dataDetail))
+
+
   };
 
   return (
@@ -87,7 +124,10 @@ const TiltCard = ({ title, imageUrl, oldPrice, newPrice, rating, isBestSeller })
           >
             <h1 className="text-2xl font-bold mb-2 text-gray-500">{title}</h1>
             <div className="text-lg mb-2">
-              <span className="block text-gray-500 mb-1" style={{ textDecoration: "line-through" }}>
+              <span
+                className="block text-gray-500 mb-1"
+                style={{ textDecoration: "line-through" }}
+              >
                 Original Price: ₹{oldPrice}
               </span>
               <span className="text-green-500 font-bold">
