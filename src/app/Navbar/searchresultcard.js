@@ -1,6 +1,3 @@
-
-
-
 // import React from "react";
 
 // const SearchResultCard = ({ title, description, oldprice, newprice, image }) => {
@@ -29,15 +26,17 @@
 
 // export { SearchResultCard };
 
-
-
-
 import React from "react";
 
-const SearchResultCard = ({ title, description, oldprice, newprice, image }) => {
+const SearchResultCard = ({
+  title,
+  description,
+  oldprice,
+  newprice,
+  image,
+}) => {
   const handleClick = () => {
     console.log(`Clicked on ${title} card`);
-    // Replace with navigation logic to product description page
   };
 
   return (
@@ -59,7 +58,9 @@ const SearchResultCard = ({ title, description, oldprice, newprice, image }) => 
         </div>
         <div className="flex justify-between">
           <p className="text-gray-700 line-through">Price: ${oldprice}</p>
-          <p className="text-green-600 font-semibold">Offer Price: ${newprice}</p>
+          <p className="text-green-600 font-semibold">
+            Offer Price: ${newprice}
+          </p>
         </div>
       </div>
     </div>
