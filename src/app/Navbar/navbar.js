@@ -1,13 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import {
-  FaSearch,
-  FaShoppingCart,
-  FaUser,
-  FaSignInAlt,
-  FaSignOutAlt,
-  FaUserCircle,
-} from "react-icons/fa";
+import { FaSearch, FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetailsActions } from "@/app/reduxStore/userInfoSlice"; // Import user actions
 import { SearchModal } from "./searchmodal";
@@ -25,15 +18,22 @@ export const Navbar = () => {
   const [showCartModal, setShowCartModal] = useState(false);
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.find.result);
-  const input=useSelector((state)=>state.find.userInput)
+  const input = useSelector((state) => state.find.userInput);
   const router = useRouter();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery !== "") {
+      dispatch(searchActions.searchParameter(searchQuery));
+      dispatch(searchActions.finalResult());
+    }
+  }, [searchQuery]);
 
   const handleSearch = () => {
     setShowSearchModal(true);
-    // fetchData();
-    dispatch(searchActions.searchParameter(searchQuery))
-    dispatch(searchActions.finalResult())
- 
   };
 
   const fetchData = async () => {
@@ -54,25 +54,10 @@ export const Navbar = () => {
       const almondData = await almonds.json();
       const raisinsData = await raisins.json();
       dispatch(searchActions.searchResult([...almondData, ...raisinsData]));
-      console.log(selector)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-
-
-
-
-
-
-
-
-
 
   const handleSearchModalClose = () => {
     setShowSearchModal(false);
@@ -92,7 +77,7 @@ export const Navbar = () => {
     dispatch(userDetailsActions.logIn(false));
     router.push("/login");
   };
-
+  console.log(selector)
   return (
     <>
       <div className="sticky top-0 left-0 right-0 z-50 bg-gray-300 text-gray-950 shadow-md bg-opacity-80 backdrop-blur-md">
