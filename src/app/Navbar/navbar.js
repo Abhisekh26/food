@@ -26,10 +26,10 @@ export const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (searchQuery !== "") {
+    // if (searchQuery !== "") {
       dispatch(searchActions.searchParameter(searchQuery));
       dispatch(searchActions.finalResult());
-    }
+    // }
   }, [searchQuery]);
 
   const handleSearch = () => {

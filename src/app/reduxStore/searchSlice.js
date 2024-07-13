@@ -5,10 +5,12 @@ const search = createSlice({
   initialState: {
     result: [],
     userInput: "",
+    arr:[]
   },
   reducers: {
     searchResult(state, action) {
       state.result = action.payload;
+      state.arr=action.payload
     },
 
     searchParameter(state, action) {
@@ -16,7 +18,7 @@ const search = createSlice({
     },
 
     finalResult(state, action) {
-      state.result = state.result.filter((item) => {
+      state.result = state.arr.filter((item) => {
       return   item.title.toLowerCase().includes(state.userInput.toLowerCase());
       });
     },
