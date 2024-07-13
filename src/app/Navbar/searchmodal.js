@@ -1,9 +1,18 @@
+
+
+
+
+
+
+
 import React, { useEffect } from "react";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
 import { useMeasure } from "react-use";
 import { FaTimes } from "react-icons/fa";
+import { SearchResultCard } from "./searchresultcard";
 
-const SearchModal = ({ searchQuery, onClose }) => {
+
+const SearchModal = ({ searchQuery, searchResults, onClose }) => {
   const [ref, { height }] = useMeasure();
   const y = useMotionValue(0);
   const controls = useAnimation();
@@ -47,7 +56,20 @@ const SearchModal = ({ searchQuery, onClose }) => {
             Search Results for: {searchQuery}
           </h2>
           
-          <p>No results found.</p>
+          {searchResults.length > 0 ? (
+            searchResults.map((result, index) => (
+              <SearchResultCard
+                key={index}
+                title={result.title}
+                description={result.description}
+                image={result.image}
+                oldprice={result.originalPrice}
+                newprice={result.discountPrice}
+              />
+            ))
+          ) : (
+            <p>No results found.</p>
+          )}
         </div>
       </motion.div>
     </motion.div>
