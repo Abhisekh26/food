@@ -1,18 +1,13 @@
 
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaShoppingCart, FaUser, FaSignInAlt, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { userDetailsActions } from "@/app/reduxStore/userInfoSlice"; // Import user actions
+import { userDetailsActions } from "@/app/reduxStore/userInfoSlice";
 import { SearchModal } from "./searchmodal";
 import CartModal from "./cartmodal";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FiHome, FiBarChart2, FiPieChart } from "react-icons/fi"; // Import icons
+import { FiHome, FiBarChart2, FiPieChart } from "react-icons/fi"; 
 import { searchActions } from "../reduxStore/searchSlice";
 
 export const Navbar = () => {
@@ -82,7 +77,7 @@ export const Navbar = () => {
     dispatch(userDetailsActions.logIn(false));
     router.push("/login");
   };
-console.log(selector)
+// console.log(selector)
   return (
     <>
       <div className="sticky top-0 left-0 right-0 z-50 bg-gray-300 text-gray-950 shadow-md bg-opacity-80 backdrop-blur-md">

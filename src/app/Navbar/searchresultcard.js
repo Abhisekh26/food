@@ -1,41 +1,49 @@
-// import React from "react";
-
-// const SearchResultCard = ({ title, description, oldprice, newprice, image }) => {
-//   return (
-//     <div className="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center">
-//       {image && (
-//         <img
-//           src={image}
-//           alt={title}
-//           className="w-16 h-16 rounded-full object-cover mr-4"
-//         />
-//       )}
-//       <div className="flex-1">
-//         <h3 className="text-xl font-bold mb-2">{title}</h3>
-//         <div className="flex justify-between mb-2">
-//           <p className="text-gray-700">{description}</p>
-//         </div>
-//         <div className="flex justify-between">
-//           <p className="text-gray-700 line-through">Price: ${oldprice}</p>
-//           <p className="text-green-600 font-semibold">Offer Price: ${newprice}</p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export { SearchResultCard };
-
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ProductdetailSlice, { ProductdetailSliceAction } from "../reduxStore/productdetailclice";
 
 const SearchResultCard = ({
   title,
   description,
-  oldprice,
-  newprice,
-  image,
+  oldPrice,
+  newPrice,
+  image1,
+  imageUrl,
+  image2,
+  image3,
+  image4,
+  isBestSeller,
+  lquantity,
+  mquantity,
+  squantity,
+  rating,
 }) => {
+
+
+  const dataDetail={ title,
+    imageUrl,
+    image1,
+    image2,
+    image3,
+    image4,
+    oldPrice,
+    newPrice,
+    rating,
+    isBestSeller,
+    lquantity,
+    mquantity,
+    squantity,}
+
+const router=useRouter()
+const path=usePathname()
+const selector=useSelector((state)=>state.product.detail)
+const dispatch=useDispatch()
+
+
   const handleClick = () => {
+    router.push(`/search/${title}`);
+    dispatch(ProductdetailSliceAction.productdetail(dataDetail))
     console.log(`Clicked on ${title} card`);
   };
 
@@ -44,9 +52,9 @@ const SearchResultCard = ({
       className="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center cursor-pointer"
       onClick={handleClick}
     >
-      {image && (
+      {image1 && (
         <img
-          src={image}
+          src={image1}
           alt={title}
           className="w-16 h-16 rounded-full object-cover mr-4"
         />
@@ -57,9 +65,9 @@ const SearchResultCard = ({
           <p className="text-gray-700">{description}</p>
         </div>
         <div className="flex justify-between">
-          <p className="text-gray-700 line-through">Price: ${oldprice}</p>
+          <p className="text-gray-700 line-through">Price: ${oldPrice}</p>
           <p className="text-green-600 font-semibold">
-            Offer Price: ${newprice}
+            Offer Price: ${newPrice}
           </p>
         </div>
       </div>

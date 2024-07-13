@@ -27,6 +27,7 @@ function Almonds() {
           <TiltCard
             key={item.id}
             title={item.title}
+            
             imageUrl={item.image}
             image1={item.imageView.image1}
             image2={item.imageView.image2}

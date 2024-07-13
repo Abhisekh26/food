@@ -31,6 +31,10 @@ const TiltCard = ({
   mquantity,
   squantity,
 }) => {
+
+
+
+  
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);

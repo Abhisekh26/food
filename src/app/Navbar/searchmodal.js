@@ -57,14 +57,23 @@ const SearchModal = ({ searchQuery, searchResults, onClose }) => {
           </h2>
           
           {searchResults.length > 0 ? (
-            searchResults.map((result, index) => (
+            searchResults.map((item, index) => (
               <SearchResultCard
-                key={index}
-                title={result.title}
-                description={result.description}
-                image={result.image}
-                oldprice={result.originalPrice}
-                newprice={result.discountPrice}
+              key={item.id}
+              title={item.title}
+              description={item.description}
+              imageUrl={item.image}
+              image1={item.imageView.image1}
+              image2={item.imageView.image2}
+              image3={item.imageView.image3}
+              image4={item.imageView.image}
+              oldPrice={item.originalPrice}
+              newPrice={item.discountPrice}
+              rating={item.ratings}
+              isBestSeller={item.bestsellers}
+              lquantity={item.large}
+              mquantity={item.medium}
+              squantity={item.small}
               />
             ))
           ) : (
