@@ -1,13 +1,24 @@
+
+
+
+
+
+
+
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../reduxStore/cartSlice";
 
 const Description = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const selector = useSelector((state) => state.product.detail);
+
+  const cartSelector = useSelector((state) => state.carts.cartItems);
+  const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState(selector.imageUrl);
   const images = [
     selector.imageUrl,
@@ -16,6 +27,19 @@ const Description = () => {
     selector.image3,
     selector.image4,
   ].filter((image) => image);
+
+  const [quantities, setQuantities] = useState({
+    250: selector.squantity ? selector.squantity.quantity || 0 : 0,
+    500: selector.mquantity ? selector.mquantity.quantity || 0 : 0,
+    1000: selector.lquantity ? selector.lquantity.quantity || 0 : 0,
+  });
+
+  const handleQuantityChange = (size, value) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [size]: value,
+    }));
+  };
 
   const openModal = (index) => {
     setSelectedImage(images[index]);
@@ -37,6 +61,13 @@ const Description = () => {
     const newIndex = (currentIndex - 1 + images.length) % images.length;
     setSelectedImage(images[newIndex]);
     setCurrentIndex(newIndex);
+  };
+
+  const addCart = (size) => {
+    if (quantities[size] > 0) {
+      dispatch(cartActions.addCart({ product: selector, size, quantity: quantities[size] }));
+    }
+    console.log(cartSelector);
   };
 
   return (
@@ -145,8 +176,17 @@ const Description = () => {
                   type="number"
                   id="size-250g"
                   className="border border-gray-300 rounded-md p-1"
-                  value={selector.squantity ? selector.squantity.quantity || 0 : 0}
+                  value={quantities[250]}
+                  onChange={(e) =>
+                    handleQuantityChange(250, parseInt(e.target.value))
+                  }
                 />
+                <button
+                  className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
+                  onClick={() => addCart(250)}
+                >
+                  Add to Cart
+                </button>
               </div>
               <div className="flex items-center space-x-2">
                 <label htmlFor="size-500g" className="text-gray-700">
@@ -156,10 +196,17 @@ const Description = () => {
                   type="number"
                   id="size-500g"
                   className="border border-gray-300 rounded-md p-1 "
-                  value={
-                    selector.mquantity? selector.mquantity.quantity || 0 : 0
+                  value={quantities[500]}
+                  onChange={(e) =>
+                    handleQuantityChange(500, parseInt(e.target.value))
                   }
                 />
+                <button
+                  className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
+                  onClick={() => addCart(500)}
+                >
+                  Add to Cart
+                </button>
               </div>
               <div className="flex items-center space-x-2">
                 <label htmlFor="size-1kg" className="text-gray-700">
@@ -169,8 +216,17 @@ const Description = () => {
                   type="number"
                   id="size-1kg"
                   className="border border-gray-300 rounded-md p-1 pr-2"
-                  value={selector.lquantity? selector.lquantity.quantity || 0 : 0}
+                  value={quantities[1000]}
+                  onChange={(e) =>
+                    handleQuantityChange(1000, parseInt(e.target.value))
+                  }
                 />
+                <button
+                  className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
+                  onClick={() => addCart(1000)}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
             <p className="text-gray-700 pt-4 mb-4">
@@ -178,9 +234,6 @@ const Description = () => {
             </p>
             <span>
               <button className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600">
-                Add to Cart
-              </button>
-              <button className="bg-indigo-500 text-white py-2 px-4 ml-6 rounded-md hover:bg-yellow-600">
                 Wishlist
               </button>
             </span>

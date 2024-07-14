@@ -59,6 +59,11 @@ export const Navbar = () => {
     }
   };
 
+
+  
+
+
+
   const handleSearchModalClose = () => {
     setShowSearchModal(false);
   };

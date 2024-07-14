@@ -11,7 +11,10 @@ import { useSelect } from "@react-three/drei";
 import { useDispatch, useSelector } from "react-redux";
 
 import { usePathname, useRouter } from "next/navigation";
-import ProductdetailSlice, { ProductdetailSliceAction } from "../reduxStore/productdetailclice";
+import ProductdetailSlice, {
+  ProductdetailSliceAction,
+} from "../reduxStore/productdetailclice";
+
 
 const ROTATION_RANGE = 32.5;
 const HALF_ROTATION_RANGE = 32.5 / 2;
@@ -31,21 +34,25 @@ const TiltCard = ({
   mquantity,
   squantity,
 }) => {
-
-
-
-  
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const xSpring = useSpring(x);
   const ySpring = useSpring(y);
   const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
-  const router=useRouter()
-  const path=usePathname()
-  const selector=useSelector((state)=>state.product.detail)
-  const dispatch=useDispatch()
-  const dataDetail={ title,
+  const router = useRouter();
+  const path = usePathname();
+  const selector = useSelector((state) => state.product.detail);
+
+  const dispatch = useDispatch();
+
+  const lquantityValue = parseInt(lquantity.quantity, 10) || 0;
+  const mquantityValue = parseInt(mquantity.quantity, 10) || 0;
+  const squantityValue = parseInt(squantity.quantity, 10) || 0;
+  const totalItems = lquantityValue + mquantityValue + squantityValue;
+
+  const dataDetail = {
+    title,
     imageUrl,
     image1,
     image2,
@@ -57,7 +64,10 @@ const TiltCard = ({
     isBestSeller,
     lquantity,
     mquantity,
-    squantity,}
+    squantity,
+    totalItems,
+  };
+  // console.log(dataDetail)
 
   const handleMouseMove = (e) => {
     if (!ref.current) return;
@@ -82,10 +92,8 @@ const TiltCard = ({
   };
 
   const handleClick = () => {
-    router.push(`${path}/${title}`)
-   dispatch(ProductdetailSliceAction.productdetail(dataDetail))
-
-
+    router.push(`${path}/${title}`);
+    dispatch(ProductdetailSliceAction.productdetail(dataDetail));
   };
 
   return (
@@ -161,9 +169,10 @@ const TiltCard = ({
               transform: "translateX(-50%)",
               zIndex: 10,
             }}
+            onClick={handleClick}
             className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition"
           >
-            Add to Cart
+            View Product
           </button>
         </div>
       </motion.div>
