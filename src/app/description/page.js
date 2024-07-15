@@ -57,9 +57,11 @@ const Description = () => {
     setCurrentIndex(newIndex);
   };
 
+ 
   const addCart = (size) => {
-    if (quantities[size] > 0) {
-      dispatch(cartActions.addCart({ product: selector, size, quantity: quantities[size] }));
+    const quantity = parseInt(quantities[size], 10);
+    if (quantity > 0) {
+      dispatch(cartActions.addCart({ product: selector, size, quantity }));
     }
     console.log(cartSelector);
   };

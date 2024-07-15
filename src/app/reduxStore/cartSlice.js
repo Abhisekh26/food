@@ -1,5 +1,4 @@
 
-
 const { createSlice } = require("@reduxjs/toolkit");
 
 const cart = createSlice({
@@ -11,7 +10,7 @@ const cart = createSlice({
     addCart(state, action) {
       const { product, size, quantity } = action.payload;
       const existingItem = state.cartItems.find(
-        (item) => item.title === product.title && item.size === size
+        (item) => item.title === product.title 
       );
 
       if (existingItem) {
@@ -23,7 +22,7 @@ const cart = createSlice({
     incrementItem(state, action) {
       const { title, size } = action.payload;
       const existingItem = state.cartItems.find(
-        (item) => item.title === title && item.size === size
+        (item) => item.title === title 
       );
       if (existingItem) {
         existingItem.quantity += 1;
@@ -32,7 +31,7 @@ const cart = createSlice({
     decrementItem(state, action) {
       const { title, size } = action.payload;
       const existingItem = state.cartItems.find(
-        (item) => item.title === title && item.size === size
+        (item) => item.title === title 
       );
       if (existingItem && existingItem.quantity > 1) {
         existingItem.quantity -= 1;
@@ -41,7 +40,7 @@ const cart = createSlice({
     removeItem(state, action) {
       const { title, size } = action.payload;
       state.cartItems = state.cartItems.filter(
-        (item) => !(item.title === title && item.size === size)
+        (item) => !(item.title === title )
       );
     },
   },

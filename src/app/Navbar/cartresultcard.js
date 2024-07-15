@@ -1,3 +1,4 @@
+
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -28,6 +29,8 @@ const CartCard = ({
   const handleDelete = () => {
     dispatch(cartActions.removeItem({ title, size }));
   };
+
+  const totalBill = newPrice * quantity;
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center cursor-pointer">
@@ -65,6 +68,7 @@ const CartCard = ({
             +
           </button>
         </div>
+        <p className="text-gray-700 mb-2">Total Bill: ${totalBill}</p>
         <button
           className="bg-red-500 text-white px-4 py-2 rounded-lg"
           onClick={handleDelete}

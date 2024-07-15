@@ -1,12 +1,17 @@
 
+
 import React from "react";
 import { FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { CartCard } from "./cartresultcard";
 
-
 const CartModal = ({ onClose }) => {
-  const cartItemss = useSelector((state) => state.carts.cartItems);
+  const cartItems = useSelector((state) => state.carts.cartItems);
+
+  // Calculate total bill for all items in the cart
+  const totalBill = cartItems.reduce((total, item) => {
+    return total + item.newPrice * item.quantity;
+  }, 0);
 
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center">
@@ -24,20 +29,26 @@ const CartModal = ({ onClose }) => {
             <h2 className="text-4xl font-bold text-gray-950">
               Your Shopping Cart
             </h2>
-            {cartItemss.length === 0 ? (
+            {cartItems.length === 0 ? (
               <p>Your cart is currently empty.</p>
             ) : (
-              cartItemss.map((item) => (
+              cartItems.map((item) => (
                 <CartCard
-                  key={item.title}
+                  key={`${item.title}-${item.size}`}
                   title={item.title}
                   description={item.description}
                   oldPrice={item.oldPrice}
                   newPrice={item.newPrice}
                   image1={item.image1}
                   quantity={item.quantity}
+                  size={item.size}
                 />
               ))
+            )}
+            {cartItems.length > 0 && (
+              <div className="bg-gray-100 p-4 rounded-md mt-4">
+                <h2 className="text-xl font-bold">Total Bill: ${totalBill}</h2>
+              </div>
             )}
           </div>
         </div>
