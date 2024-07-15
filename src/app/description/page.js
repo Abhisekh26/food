@@ -117,6 +117,23 @@ const Description = () => {
               </span>
             </p>
 
+
+
+
+
+            <p className="text-sm text-gray-500 mt-1">
+              * Price shown is for 1000 grams
+            </p>
+
+
+
+
+
+
+
+
+
+
             <div className="mt-8">
               <h2 className="text-xl font-semibold mb-4">Available offers</h2>
               <div className="p-2 rounded-md">
