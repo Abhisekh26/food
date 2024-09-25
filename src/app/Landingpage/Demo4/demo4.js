@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
-
+import Image from 'next/image';
 const imgs = [
     "/almonds.jpg",
     "/apricots.png",
@@ -43,7 +43,7 @@ export const Demo4 = () => {
     }, AUTO_DELAY);
 
     return () => clearInterval(intervalRef);
-  }, []);
+  }, [dragX]);
 
   const onDragEnd = () => {
     const x = dragX.get();

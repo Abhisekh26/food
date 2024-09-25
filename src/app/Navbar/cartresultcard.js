@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../reduxStore/cartSlice";
-
+import Image from 'next/image';
 const CartCard = ({
   title,
   description,
@@ -35,7 +35,7 @@ const CartCard = ({
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-4 flex items-center cursor-pointer">
       {image1 && (
-        <img
+        <Image
           src={image1}
           alt={title}
           className="w-16 h-16 rounded-full object-cover mr-4"

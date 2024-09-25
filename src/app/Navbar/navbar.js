@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FiHome, FiBarChart2, FiPieChart } from "react-icons/fi"; 
 import { searchActions } from "../reduxStore/searchSlice";
-
+import Image from 'next/image';
 export const Navbar = () => {
   const [selected, setSelected] = useState(1);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -88,9 +88,11 @@ export const Navbar = () => {
       <div className="sticky top-0 left-0 right-0 z-50 bg-gray-300 text-gray-950 shadow-md bg-opacity-80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
           <div className="flex items-center mr-16">
-            <img
+            <Image
               src="/nutrinuts.png"
               alt="Logo"
+              width={40} 
+              height={40}
               className="w-10 h-10 md:w-16 md:h-16 mr-2"
             />
           </div>

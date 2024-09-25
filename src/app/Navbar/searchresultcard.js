@@ -2,7 +2,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductdetailSlice, { ProductdetailSliceAction } from "../reduxStore/productdetailclice";
-
+import Image from 'next/image';
 const SearchResultCard = ({
   title,
   description,
@@ -56,6 +56,7 @@ const dispatch=useDispatch()
         <img
           src={image1}
           alt={title}
+         
           className="w-16 h-16 rounded-full object-cover mr-4"
         />
       )}

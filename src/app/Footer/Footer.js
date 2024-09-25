@@ -2,16 +2,18 @@
 import Link from "next/link";
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-
+import Image from 'next/image';
 const Footer = () => {
   return (
     <footer className="sticky bg-gray-300 text-gray-950 py-8 ">
       <div className="container mx-auto flex flex-wrap justify-between items-start px-4 md:px-8">
         {/* Logo and About */}
         <div className="w-full md:w-1/3 mb-6 md:mb-0">
-          <img
+          <Image
             src="/nutrinuts.png"
             alt="Logo"
+            width={40}
+            height={40}
             className="w-10 h-10 md:w-16 md:h-16 mb-4"
           />
           <p className="text-sm">

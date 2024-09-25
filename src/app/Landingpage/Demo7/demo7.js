@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
-
+import Image from 'next/image';
 const Demo7 = () => {
   const [order, setOrder] = useState(["front", "middle", "back"]);
 
@@ -111,9 +111,11 @@ const Card = ({ handleShuffle, testimonial, position, imgUrl, author }) => {
         draggable ? "cursor-grab active:cursor-grabbing" : ""
       }`}
     >
-      <img
+      <Image
         src={imgUrl}
-        // alt={`Image of ${author}`}
+        width={350}  
+        height={200} 
+        alt="imagee"
         className="pointer-events-none mx-auto h-32 w-32 rounded-full border-2 border-slate-700 bg-slate-200 object-cover"
       />
       <span className="text-center text-lg italic text-slate-400">

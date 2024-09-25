@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import useMeasure from "react-use-measure";
+import Image from 'next/image';
 
 const CARD_WIDTH = 350;
 const MARGIN = 20;
@@ -95,8 +96,10 @@ const DryFruitCard = ({ imgUrl, name, description, price }) => {
         marginRight: MARGIN,
       }}
     >
-      <img
+      <Image 
         src={imgUrl}
+        width={350}  
+        height={200} 
         className="mb-3 h-[200px] w-full rounded-lg object-cover"
         alt={name}
       />

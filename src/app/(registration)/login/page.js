@@ -46,7 +46,8 @@ const Login = () => {
          alert ("Enter valid credentials")
       }
     } catch (error) {
-      
+      alert("An error occurred. Please try again.");
+      console.error(error)
     }
   }
 
@@ -112,7 +113,7 @@ const Login = () => {
               <span className="ml-2">Remember me</span>
             </label>
             <a className="text-sm text-purple-200 hover:underline" href="#">
-              Forgot your password?
+              Forgot your password
             </a>
           </div>
           <button
@@ -124,7 +125,7 @@ const Login = () => {
           </button>
         </form>
         <div className="text-center text-gray-300">
-          Don't have an account?
+          Dont have an account
           <Link className="text-purple-300 hover:underline" href="/signup">
             Register
           </Link>
