@@ -53,10 +53,11 @@ const dispatch=useDispatch()
       onClick={handleClick}
     >
       {image1 && (
-        <img
+        <Image
           src={image1}
           alt={title}
-         
+         height={30}
+         width={40}
           className="w-16 h-16 rounded-full object-cover mr-4"
         />
       )}

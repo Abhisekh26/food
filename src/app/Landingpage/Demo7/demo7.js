@@ -19,7 +19,7 @@ const Demo7 = () => {
             Discover the Best Dry Fruits
           </h3>
           <p className="mb-8 mt-4 text-lg text-slate-400">
-            Join our newsletter for the latest updates on our premium dry fruits selection, special offers, and health tips.
+            Join our newsletter for the latest updates on our premium dry fruits selection special offers and health tips
           </p>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -119,7 +119,7 @@ const Card = ({ handleShuffle, testimonial, position, imgUrl, author }) => {
         className="pointer-events-none mx-auto h-32 w-32 rounded-full border-2 border-slate-700 bg-slate-200 object-cover"
       />
       <span className="text-center text-lg italic text-slate-400">
-        "{testimonial}"
+      {testimonial}
       </span>
       <span className="text-center text-sm font-medium text-indigo-400">
         {author}

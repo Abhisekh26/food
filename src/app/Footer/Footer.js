@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="sticky bg-gray-300 text-gray-950 py-8 ">
       <div className="container mx-auto flex flex-wrap justify-between items-start px-4 md:px-8">
-        {/* Logo and About */}
+       
         <div className="w-full md:w-1/3 mb-6 md:mb-0">
           <Image
             src="/nutrinuts.png"
@@ -23,7 +23,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Navigation Links */}
         <div className="w-full md:w-1/3 mb-6 md:mb-0">
           <h3 className="text-lg font-bold mb-4">Quick Links</h3>
           <ul className="text-sm space-y-2">

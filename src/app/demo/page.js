@@ -9,6 +9,7 @@ import {
 import { AiFillStar } from "react-icons/ai";
 import { useSelect } from "@react-three/drei";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 
 import { usePathname, useRouter } from "next/navigation";
 import ProductdetailSlice, {
@@ -123,9 +124,11 @@ const TiltCard = ({
               <span className="text-xs">Best Seller</span>
             </div>
           )}
-          <img
+          <Image
             src={imageUrl}
             alt={title}
+            width={30}
+            height={40}
             className="w-full h-48 object-cover rounded-t-lg relative"
           />
           <div
