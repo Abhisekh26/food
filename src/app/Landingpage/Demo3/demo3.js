@@ -102,7 +102,7 @@ const DryFruitCard = ({ imgUrl, name, description, price }) => {
       />
      <p className="mt-1.5 text-lg font-medium text-gray-800">{name}</p>
       <p className="text-sm text-gray-600">{description}</p>
-      <p className="text-lg text-green-600 font-bold mt-1">${price}</p>
+      <p className="text-lg text-green-600 font-bold mt-1">₹{price}</p>
     </div>
   );
 };
@@ -115,48 +115,48 @@ const dryFruits = [
     imgUrl: "/almonds.jpg",
     name: "Premium Almonds",
     description: "Crunchy and nutritious almonds.",
-    price: "12.99",
+    price: "1299",
   },
   {
     id: 2,
     imgUrl: "/cashew.png",
     name: "Organic Cashews",
     description: "Creamy and delicious cashews.",
-    price: "15.49",
+    price: "1549",
   },
   {
     id: 3,
     imgUrl: "/mixednuts.png",
     name: "California Walnuts",
     description: "Fresh and healthy walnuts.",
-    price: "10.99",
+    price: "1099",
   },
   {
     id: 4,
     imgUrl: "/pistachios.png",
     name: "Roasted Pistachios",
     description: "Salted and roasted pistachios.",
-    price: "14.99",
+    price: "1499",
   },
   {
     id: 5,
     imgUrl: "/Dates.png",
     name: "Organic Dates",
     description: "Sweet and chewy dates.",
-    price: "9.99",
+    price: "999",
   },
   {
     id: 6,
     imgUrl: "/raisins.png",
     name: "Golden Raisins",
     description: "Juicy and sweet raisins.",
-    price: "8.49",
+    price: "849",
   },
   {
     id: 7,
     imgUrl: "/apricots.png",
     name: "Dried Apricots",
     description: "Tangy and flavorful apricots.",
-    price: "11.99",
+    price: "1199",
   },
 ];

@@ -7,7 +7,7 @@ import { CartCard } from "./cartresultcard";
 const CartModal = ({ onClose }) => {
   const cartItems = useSelector((state) => state.carts.cartItems);
 
-  // Calculate total bill for all items in the cart
+ 
   const totalBill = cartItems.reduce((total, item) => {
     return total + (item.newPrice / 1000) * item.size * item.quantity;
   }, 0);
